@@ -1,0 +1,11 @@
+*.csv
+**/node_modules/
+*.class
+/thumbnail-try/
+*/.vscode/
+*.log
+base64_param_*.json
+*.jar
+*.zip
+/.vscode
+local.env

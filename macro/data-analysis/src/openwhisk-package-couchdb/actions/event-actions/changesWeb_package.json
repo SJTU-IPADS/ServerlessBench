@@ -1,0 +1,11 @@
+{
+  "name": "changesWebAction",
+  "version": "1.0.0",
+  "main": "changesWebAction.js",
+  "dependencies" : {
+    "nano": "^8.1.0",
+    "openwhisk": "^3.18.0",
+    "moment": "^2.24.0",
+    "request": "^2.88.0"
+  }
+}

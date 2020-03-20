@@ -1,0 +1,22 @@
+Source: hello
+Section: devel
+Priority: optional
+Maintainer: Santiago Vila <sanvila@debian.org>
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 9.20120311)
+Homepage: http://www.gnu.org/software/hello/
+
+Package: hello
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: hello-traditional
+Replaces: hello-traditional, hello-debhelper (<< 2.9)
+Breaks: hello-debhelper (<< 2.9)
+Description: example package based on GNU hello
+ The GNU hello program produces a familiar, friendly greeting.  It
+ allows non-programmers to use a classic computer science tool which
+ would otherwise be unavailable to them.
+ .
+ Seriously, though: this is an example of how to do a Debian package.
+ It is the Debian version of the GNU Project's `hello world' program
+ (which is itself an example for the GNU Project).

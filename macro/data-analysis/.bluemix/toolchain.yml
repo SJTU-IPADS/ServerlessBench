@@ -1,0 +1,51 @@
+---
+name: "Cloudant Data Processing with OpenWhisk Toolchain"
+description: "Cloudant Data Processing with OpenWhisk application"
+version: 0.1
+required:
+ - deploy
+
+git-cloudant-data-processing:
+  service_id: githubpublic
+  parameters:
+    repo_name: "openwhisk-data-processing-cloudant-{{name}}"
+    repo_url: "https://github.com/IBM/openwhisk-data-processing-cloudant"
+    type: clone
+    has_issues: true
+
+pipeline-cloudant-data-processing:
+  service_id: pipeline
+  hidden: [form, description]
+  parameters:
+    name: "cloudant-data-processing"
+    ui-pipeline: true
+    services: ["git-cloudant-data-processing"]
+    configuration:
+      content: $file(pipeline.yml)
+      env:
+       REPO: "git-cloudant-data-processing"
+       REGION: "{{deploy.parameters.deploy-region}}"
+       ORG: "{{deploy.parameters.deploy-org}}"
+       SPACE: "{{deploy.parameters.deploy-space}}"
+       NAME: "{{pipeline-cloudant-data-processing.parameters.name}}-{{deploy.parameters.deploy-space}}"
+       OPENWHISK_API_ENDPOINT: "{{deploy.parameters.openwhisk-api-endpoint}}"
+       OPENWHISK_AUTH_KEY: "{{deploy.parameters.openwhisk-auth-key}}"
+       CLOUDANT_INSTANCE: "{{deploy.parameters.cloudant-instance}}"
+       CLOUDANT_USERNAME: "{{deploy.parameters.cloudant-username}}"
+       CLOUDANT_PASSWORD: "{{deploy.parameters.cloudant-password}}"
+       CLOUDANT_DATABASE: "{{deploy.parameters.cloudant-database}}"
+      execute: false
+
+deploy:
+  schema: deploy.json
+  service-category: pipeline
+  parameters:
+    deploy-region: "{{region}}"
+    deploy-org: "{{organization}}"
+    deploy-space: "{{space}}"
+    openwhisk-api-endpoint: "openwhisk.ng.bluemix.net"
+    openwhisk-auth-key: ""
+    cloudant-instance: "openwhisk-cloudant"
+    cloudant-username: ""
+    cloudant-password: ""
+    cloudant-database: "cats"

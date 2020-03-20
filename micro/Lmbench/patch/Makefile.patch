@@ -1,0 +1,4 @@
+61c61
+< COMPILE=$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+---
+> COMPILE=$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -static

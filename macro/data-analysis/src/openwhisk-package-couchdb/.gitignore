@@ -1,0 +1,16 @@
+.gradle
+build/
+node_modules/
+actions/event-actions/*.zip
+actions/event-actions/package.json
+.idea
+*.iml
+package-lock.json
+
+# Eclipse
+bin/
+**/.project
+.settings/
+.classpath
+.cache-main
+.cache-tests

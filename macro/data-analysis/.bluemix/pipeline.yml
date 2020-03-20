@@ -1,0 +1,103 @@
+---
+stages:
+- name: Deploy
+  inputs:
+  - service: ${REPO}
+    type: git
+    branch: master
+    dir_name: null
+  triggers:
+  - type: commit
+  properties:
+  - name: OPENWHISK_API_ENDPOINT
+    value: ${OPENWHISK_API_ENDPOINT}
+    type: text
+  - name: OPENWHISK_AUTH_KEY
+    value: ${OPENWHISK_AUTH_KEY}
+    type: secure
+  - name: CLOUDANT_INSTANCE
+    value: ${CLOUDANT_INSTANCE}
+    type: text
+  - name: CLOUDANT_USERNAME
+    value: ${CLOUDANT_USERNAME}
+    type: text
+  - name: CLOUDANT_DATABASE
+    value: ${CLOUDANT_DATABASE}
+    type: text
+  - name: CLOUDANT_PASSWORD
+    value: ${CLOUDANT_PASSWORD}
+    type: secure
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION}
+      organization: ${ORG}
+      space: ${SPACE}
+      application: cloudantdataprocessing
+    script: |+
+      #!/bin/bash
+
+      set -x
+      set +e
+
+      # download openwhisk cli
+      if [ ! -f ./wsk ]; then
+          wget https://openwhisk.ng.bluemix.net/cli/go/download/linux/amd64/wsk
+          chmod u+x wsk
+      fi
+
+      # set up openwhisk cli
+      ./wsk property set --apihost ${OPENWHISK_API_ENDPOINT} --auth ${OPENWHISK_AUTH_KEY}
+
+      # create openwhisk package
+      ./wsk package refresh
+
+      echo "Creating a clean deployment"
+      ./wsk rule disable echo-images
+      sleep 1
+      ./wsk rule delete echo-images
+      ./wsk trigger delete image-uploaded
+      ./wsk action delete write-to-cloudant
+      ./wsk action delete write-from-cloudant
+      ./wsk action delete write-from-cloudant-sequence
+      ./wsk package delete "$CLOUDANT_INSTANCE"
+      sleep 1
+
+      set -e
+
+      echo "Binding package"
+      ./wsk package bind /whisk.system/cloudant "$CLOUDANT_INSTANCE" \
+          --param username "$CLOUDANT_USERNAME" \
+          --param password "$CLOUDANT_PASSWORD" \
+          --param host "$CLOUDANT_USERNAME.cloudant.com"
+
+      echo "Creating write-from-cloudant ..."
+      ./wsk action create write-from-cloudant actions/write-from-cloudant.js
+
+      echo "Creating write-from-cloudant ..."
+      ./wsk action create write-to-cloudant actions/write-to-cloudant.js \
+          --param CLOUDANT_USERNAME "$CLOUDANT_USERNAME" \
+          --param CLOUDANT_PASSWORD "$CLOUDANT_PASSWORD" \
+          --param CLOUDANT_DATABASE "$CLOUDANT_DATABASE"
+
+      echo "Creating write-from-cloudant-sequence ..."
+      ./wsk action update write-from-cloudant-sequence \
+          --sequence /_/$CLOUDANT_INSTANCE/read,write-from-cloudant
+
+      echo "Creating trigger image-uploaded for feed $CLOUDANT_INSTANCE/changes on db $CLOUDANT_DATABASE ..."
+      ./wsk trigger create image-uploaded \
+          --feed "/_/$CLOUDANT_INSTANCE/changes" \
+          --param dbname "$CLOUDANT_DATABASE"
+
+      echo "Creating rule echo-images on image-uploaded ..."
+      ./wsk rule create echo-images image-uploaded write-from-cloudant-sequence
+
+      echo "Test that everything is working ..."
+      ./wsk action invoke --blocking --result write-to-cloudant
+
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish

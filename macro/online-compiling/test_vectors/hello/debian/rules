@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_auto_clean:
+	[ ! -f Makefile ] || $(MAKE) distclean
+
+override_dh_installdocs:
+	dh_installdocs NEWS

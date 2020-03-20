@@ -1,0 +1,481 @@
+2017-07-21 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.3.2 released.
+
+	* Platform support:
+		* Explicitly enable binding to both IPv4 and IPv6 addresses.
+		  (Giel van Schijndel)
+		* Restore perl 5.8.8 support for RHEL5.  (Alexander Chernyakhovsky)
+		* Make tests detect UTF-8 locale with a helper executable.  (John Hood)
+		* Don't print /etc/motd on IllumOS.  (John Hood)
+		* Print {,/var}/run/motd.dynamic on Ubuntu.  (John Hood)
+		* Fix build on Haiku. (Adrien Destugues)
+		* Disable unicode-later-combining.test for tmux 2.4.
+		  This fixes build failures.  (John Hood)
+
+	* Bug fixes:
+		* In tests, explicitly set 80x24 tmux window, for newer versions
+		  of tmux.  (John Hood)
+		* Work around JuiceSSH rendering bug.  (John Hood)
+		* Do not move cursor for SCROLL UP and SCROLL DOWN--
+		  fixes an issue with tmux 2.4.  (John Hood)
+
+2017-03-25 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.3.0 released.
+
+	* New features:
+		* Change website URLs from http://mosh.mit.edu to
+		  https://mosh.org.  (Keith Winstein)
+		* Add --no-ssh-pty option for Dropbear compatibility and
+		  other issues.
+		* Switch to semantic versioning, making this version 1.3.0
+		  instead of 1.2.7.
+
+	* Platform support:
+		* Added nonce-incrementing test.  (Keith Winstein)
+		* Add build-source-package.sh for Debian.  (Keith Winstein)
+		* Fix CPPFLAGS handling possibly causing curses detection
+		  failure.  (John Hood)
+		* Add an Appveyor/Cygwin CI build.
+		* Improve warning-flags detection for 'make distcheck'.  (John Hood)
+		* Improve robustness of regression tests.  (John Hood)
+		* Support OpenBSD pledge() sandboxing.  (John Hood)
+		* Use backward-compatible name for AES in
+		  AppleCommonCrypto, fixing builds with older OS X SDKs.  (John Hood)
+		* Detect clock_gettime() and CLOCK_MONOTONIC carefully,
+		  fixing OS X 10.12 + Xcode 7.3 builds.  (John Hood)
+		* Support older versions of Perl, back to 5.10, fixing
+		  RHEL 5 builds. (Anders Kaseorg)
+		* Add a Travis OS X CI and release build.  (John Hood)
+		* Add --help and --version, enabling Automake's
+		 'std-options' checks.  (Anders Kaseorg)
+		* Add a simple smoke test not requiring tmux, to help
+		  validate builds on older platforms including RHEL 5. (Anders Kaseorg)
+		* Check for presence of clock_gettime() for OS X, where
+		  the symbol may not be resolved on older OS X versions.  (John
+		  Hood)
+		* Fix a memory alignment issue in OCB with ARM/Neon. (Carlos Cabanero)
+		* Mosh now runs correctly on Bash for Windows with Windows 10
+		  Insider builds 15002 and higher. (No change in Mosh)
+		* Other minor platform compatibility fixes for Mosh
+		  sources and tests.  (John Hood)
+
+	* Bug fixes:
+		* Work around a pty buffering issue causing failed
+		  connections on FreeBSD 11, or with Dropbear.  (John Hood)
+		* Restore '-p 0' option for OS-selected UDP port bindings.  (John Hood)
+		* Shell hygiene fixes, including better quoting of
+		  pathnames.  (Anders Kaseorg)
+		* Fix typos in project docs.  (Jakub Wilk)
+		* Fix excess newlines on mosh client startup/shutdown.  (John Hood)
+		* Exit gracefully, closing session, on pty write or ioctl failure.  (John Hood)
+		* Fix two bugs that caused mosh-server to consume
+		  excessive CPU in certain circumstances.  (John Hood)
+		* Fix bug that caused text copied from mosh-client to
+		  paste as long lines joined by spaces.  (John Hood)
+		* Documentation improvements. (chenxiaoqino, Ashish Gupta)
+		* Use getuid(), not geteuid(), for correct getpw* lookups.  (John Hood)
+
+2016-08-10 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2.6 released.
+
+	* New features:
+		* Add Travis CI builds for Linux and Mac.  (Anders Kaseorg, others)
+		* Add a --local option to run without ssh.  (John Hood)
+		* Mosh now returns exitstatus reflecting connection success.
+		  (John Hood)
+		* Add an end-to-end test suite and many tests.  (John Hood)
+		* Implement timeouts and signals to help address orphaned sessions.
+		  (John Hood)
+		* Major rework of Mosh's display differencing/rendering
+		  code with much improved performance for slow machines.  (John Hood)
+		* Implement ANSI back/forward tab (CSI CBT, CSI CHT).
+		  (John Hood)
+		* Do not start user shell until network session starts.
+		  (John Hood)
+		* Add options for more flexible specification of IPv4/IPv6
+		  hostname resolution.  (John Hood)
+		* Improved bash completion.  (Steve Dignam, HIGUCHI Yuta)
+		* Add options for different methods of resolving the remote host
+		  address, allowing operation without SshProxyCommand.  (John Hood)
+
+	* Platform support:
+		* Add configurable support for Apple Common Crypto and
+		  Nettle, in place of OpenSSL.  Implement base64 locally.
+		  (John Hood)
+		* Workaround Cygwin select() bug.  (John Hood)
+		* Updates to Debian packaging.  (Anders Kaseorg, Keith Winstein)
+		* Workaround a glibc-2.22 issue causing segfaults on Debian Sid.
+		  (John Hood with help from many others)
+		* Prefer c++ to g++, for systems like FreeBSD where g++ is not usable.
+		  (John Hood)
+		* Fixes for Illumos Hipster 20151003.  (John Hood)
+		* Disable -Werror for protobuf code, to resolve a new gcc6 warning.
+		  (John Hood)
+		* Link test for -fstack-protector-all on an embedded platform.
+		  (Baruch Siach)
+		* Resolve issue with bswap64() on FreeBSD-CURRENT with libc++-3.8.0.
+		  (John Hood)
+		* Fix issue with RECVTOS error message on client on FreeBSD.
+		  (John Hood)
+
+	* Bug fixes:
+		* Remove an assertion causing aborts on Unicode fallback found by
+		  fuzzing with afl.  (Keith Winstein)
+		* Fix a server hang with XON/XOFF on BSD systems.  (John Hood)
+		* Fix a typeahead-prediction bug that caused display corruption on
+		  urxvt.  (John Hood)
+
+2015-07-12 Keith Winstein <mosh-devel@mit.edu>
+
+       * Version 1.2.5 released.
+
+       * New features:
+               * Bind to a specific IP address with --bind-server. (Philipp
+		 Haselwarter)
+               * MOSH_ESCAPE_KEY configures escape character.  (Timo
+		 J. Rinne)
+               * Support non-roaming IPv6. (Anders Kaseorg)
+               * Implement XTerm mouse mode. (Barosl LEE, Andrew Chin,
+		 Louis Kruger)
+               * Report Git revision along with version if available.
+		 (John Hood)
+
+       * Platform support:
+               * Add pselect() emulation. (Jérémie Courrèges-Anglas)
+               * OpenBSD, OS X: Fix be64toh-related issues. (Jérémie
+		 Courrèges-Anglas)
+               * ARM Neon: fix gcc4.8 compiling problem(Pasi Sjöholm)
+               * NaCl: Conditionally rename main to mosh_main. (Richard
+		 Woodbury)
+               * FreeBSD: Token pasting, forkpty(), ARM fixes. (John Hood)
+               * AIX: Implement CTTY grabbing when TIOCSCTTY is missing
+                 (Anton Lundin)
+	       * OS X: Broaden build support to cover OS X 10.5 through
+		 10.10. (John Hood)
+	       * Debian: Improve bash-completion install and
+		 functionality. (Suggested by Gabriel Filion, John Hood)
+
+       * Bug fixes:
+               * Automake/autoconf workarounds.  (Anders Kaseorg)
+               * mosh-server: Allow startup without PTY.  (Keith Winstein)
+               * network.cc: Properly close old fd on Socket assignment
+		 operator. (Thanks to Igor Bukanov)
+               * mosh-server:  Allow startup with zero-window-size PTY.
+                 (Igor Bukanov)
+               * AddrInfo: Fix error message generation when node == NULL
+                 (Anders Kaseorg)
+               * Timestamp: Prevent integer overflow on Darwin PPC 32-bit
+                 (Anders Kaseorg)
+               * scripts/mosh: Fix hang when remote closes the connection
+                 (Anders Kaseorg)
+               * Fix issues with parsing of 256-color SGR sequences.
+                 (John Hood)
+               * Numerous code hygiene, Coverity, and Clang static analyzer
+                 fixes.  (Anders Kaseorg, Geoffrey Thomas, John Hood)
+
+2013-03-27 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2.4 released.
+
+	* New features:
+	        * Support port ranges with -p LOWPORT:HIGHPORT (Luke Mewburn)
+	        * Ctrl-^ Ctrl-Z suspends mosh client (Nikolai Zeldovich)
+	        * mm:ss display of lost-contact times (Kevin Ballard)
+	        * Show infobar with control chars when Ctrl-^ is typed
+	        * Put terminal in altscreen mode (Anders Kaseorg)
+	        * Tell automake/Debian pkg about our checks (Anders Kaseorg)
+
+	* Platform support:
+	        * OS X: Script to build a universal package (Peter Iannucci)
+	        * FreeBSD: Fix build problems (Jimmy Olgeni)
+	        * AIX: port by Anton Lundin
+	        * Solaris with system curses (Anton Lundin)
+	        * Cygwin and others: eliminate use of IO::Pty (Anton Lundin)
+
+	* Bug fixes:
+	        * Fix bug (introduced in 1.2.3) where server stays around
+	          if process quits while client is detached
+	        * Clean up spurious entries from detached sessions warning
+		* Fix freeze when connectivity is one-directional for hours
+	          (reported by Axel Beckert)
+	        * Don't wipe title until a new one is set (sqweek)
+	        * Eliminate memory leaks and cppcheck warnings (Anders Kaseorg)
+
+2012-10-19 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2.3 released.
+
+	* Security improvements:
+		* Use OpenSSL AES implementation
+		* Update AES-OCB implementation (Keegan McAllister)
+		* Don't let bad server dictate IP (Felix Groebert)
+
+	* New features:
+		* Client hops ports to survive challenging client-side firewall
+		* Server stops sending to save client power (Daniel Drown)
+		* Set DiffServ code point and ECN-capable (Dave Täht)
+		* Slow down if explicit congestion notification received
+		* Warn about unattached Mosh sessions on login
+		* Compatible with KDE konsole (uses BEL to terminate OSC)
+		* Improved heuristic about color of predicted characters
+
+	* Bug fixes:
+		* Improved performance on systems with expensive time
+		* No longer choke on "ffff::" address for hosts with IPv6
+		* More conservative MTU and datagram sizing
+
+	* Platform support:
+		* Build on Solaris and IllumOS (Timo Sirainen, Ira Cooper)
+		* Build on ARM with gcc 4.7 (Alexander Chernyakhovsky)
+
+	* Licensing changes:
+		* Allow distribution on Apple App Stores
+		* Allow linking with OpenSSL
+
+2012-06-12 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2.2 released.
+
+	* Remove warning on out-of-order/duplicated datagrams
+
+	* Add "experimental" prediction mode
+
+2012-05-25 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2.1 released.
+
+	* Improve performance on lossy links.
+
+	* New diagnostic message when link is dead in only one direction.
+
+	* Use less CPU when link is down. (Keegan McAllister)
+
+	* Use much less CPU when application or mosh-server sends
+	  large repeat counts (resolves CVE-2012-2385, reported by
+	  Timo Juhani Lindfors).
+
+	* Use less memory when mosh-server is malicious.
+
+	* Fix vttest regression re: wrapping and tabs.
+
+	* Enable roundtrip verifier of terminal emulator correctness
+	  when verbose.
+
+	* Remove skalibs as a dependency. (Keegan McAllister)
+
+	* Remove use of poll() and OS X poll workaround. (Keegan McAllister)
+
+	* Include bash_completion file. (ejeffrey)
+
+	* Include UFW firewall profile. (Fumihito YOSHIDA)
+
+	* Warning on out-of-order/duplicated datagrams
+	  (or failed nonce increment).
+
+	* Clearer error message on invalid port number.
+
+	* Cleanups to quit scenario when firewalled.
+
+2012-04-26 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.2 released.
+
+	* Remove Boost as a dependency (Keegan McAllister)
+
+	* Add support for FreeBSD, Cygwin, RHEL/CentOS 5, OS X 10.5 on PPC.
+
+	* More verbose and helpful diagnostics. Server now has -v flag.
+
+	* Client now has --ssh= flag to set SSH options (like port)
+
+	* Remove skalibs as a dependency on Debian/Ubuntu (Keegan McAllister)
+
+	* Now passes locale-related env vars over the connection
+
+	* Fix startup script to no longer hang on some Macs (Jay Freeman)
+
+	* Fix terminal emulation and argument parsing on FreeBSD
+
+	* Fix alignment problems on ARM
+
+	* Now prints message of the day
+
+	* Use binary hardening flags where available (Keegan McAllister)
+
+	* Responsiveness and CPU-usage improvements
+
+	* Several terminal-emulation improvements and bug fixes
+
+2012-04-03 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.1.3 released.
+
+	* Builds on armel, armhf, and kFreeBSD.
+
+	* Fixes bug causing occasional missing/extra wraparound copy-and-paste.
+
+	* Eliminates valgrind complaint over unused winsize fields.
+
+	* Close connection after four petabytes (per OCB recommendation).
+
+2012-03-28 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.1.2 released.
+
+	* Fixes to build on OS X 10.5 with older gcc and -lpoll (Quentin Smith)
+
+	* Add --with-utempter and --without-utempter per gentoo request
+	  (Michael Weber)
+
+	* configure now requires ncurses headers (and others) to be installed
+
+	* Consolidate locale routines to help Android port (Keegan McAllister)
+
+2012-03-27 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.1.1 released.
+
+	* Fix spec file and build failure on Fedora.
+
+	* Print out error message properly on fatal_assert().
+
+	* Support for machines without posix_memalign().
+
+2012-03-22 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.1 released (stable release).
+
+	* Allows user to specify remote command to execute.
+
+	* Only advertises 256 colors when user's terminal has 256 colors.
+
+	* Add chaff to datagrams to frustrate statistical analysis of length
+
+	* Cosmetic fixes to terminal handling
+
+	* Improved startup script (Anders Kaseorg)
+
+2012-03-16 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.0.2 released.
+
+	* Uses xterm-256color and supports 256-color escape sequences.
+
+	* Posterizes to 8 colors unless the user has a 256-color terminal.
+
+	* Handles terminals without BCE.
+
+	* Starts login shell.
+
+2012-03-14 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.0.1 released.
+
+	* Roughly 40% less CPU usage.
+
+2012-03-12 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 1.0 released.
+
+	* mosh now supports --version option and prints no-warranty message.
+
+2012-03-10 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.98 released.
+
+	* Add option to select server-side UDP port.
+
+	* Restrict default UDP port range to 60000..61000.
+
+	* Use TERM / terminfo to decide when to send ECH sequence.
+
+	* Now works properly inside tmux.
+
+2012-03-07 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.97 released.
+
+	* Merged Mac OS X port (thanks to Quentin Smith and Anders Kaseorg)
+
+	* Server will quit if no connection within first 60 seconds
+
+	* Startup script no longer requires threaded Perl
+
+	* Add --enable-compile-warnings=error to ./configure
+
+	* Fix some flicker issues with adaptive prediction mode
+
+2012-02-26 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.96 released.
+
+	* Compress all instructions with zlib
+
+2012-02-25 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.95 released.
+
+	* Make echo acknowledgment reliable to reduce spurious mispredict detections.
+
+	* Require two dropped heartbeats before showing blue bar of lost contact
+
+	* Print newline before MOSH CONNECT string to make more robust if intermediate keys hit
+
+	* Disable ControlMaster in initial SSH connection so proxy is always used
+
+	* Make retransmissions occur at frame rate (vs. every 3 seconds) for limited time after loss
+
+2012-02-15 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.94 released.
+
+	* Make man pages
+
+	* Replace C++11 features (lambda and auto) with boost equivalents
+	(Anders Kaseorg)
+
+	* Now builds with g++ or clang (with libstdc++)
+
+2012-02-13 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.93 released.
+
+	* Make utmp entries
+
+2012-02-13 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.92 released.
+
+	* Allows user to select prediction mode (always/never/adaptive)
+
+	* Fix bug in server startup on slow hosts
+
+	* Better prediction when deleting at line ending
+
+2012-02-09 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.91 released.
+
+	* Startup script support SSH options and aliases (Anders Kaseorg)
+
+	* End use of Path MTU discovery and allow IP fragmentation because,
+	e.g., Cisco VPN has MTU of 1200 and does not pass ICMP too-big.
+
+	* Better exception and error handling.
+
+	* Restrict predictive local echo display to long-delay links
+	(>60 ms RTT) or for temporarily after a "glitch." Otherwise simply
+	show server echos, while maintaining prediction overlay in the
+	background in case it is needed.
+
+2012-02-07 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.9b released.
+	* Improvements to build system (Anders Kaseorg)
+
+2012-02-06 Keith Winstein <mosh-devel@mit.edu>
+
+	* Version 0.9 released.

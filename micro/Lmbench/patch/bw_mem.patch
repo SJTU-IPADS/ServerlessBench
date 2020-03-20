@@ -1,0 +1,39 @@
+57c57
+< void	adjusted_bandwidth(uint64 t, uint64 b, uint64 iter, double ovrhd);
+---
+> void	adjusted_bandwidth(uint64 t, uint64 b, uint64 iter, double ovrhd, struct timeval tv);
+61a62,63
+> 	struct timeval tv;
+> 	gettimeofday(&tv,NULL);
+139c141
+< 			   get_n() * parallel, state.overhead);
+---
+> 			   get_n() * parallel, state.overhead, tv);
+441c443
+< void adjusted_bandwidth(uint64 time, uint64 bytes, uint64 iter, double overhd)
+---
+> void adjusted_bandwidth(uint64 time, uint64 bytes, uint64 iter, double overhd, struct timeval tv)
+453a456
+> 	/*
+462a466,479
+> 	}*/
+> 	char *result = NULL;
+> 	//256 is the max size
+> 	result = (char *)malloc(sizeof(char) * 256);
+> 	bzero(result,256);
+> 	if (mb < 1.) {
+> 		sprintf(result, "{ \"size\": \"%.6f\", ", mb);
+> 	} else {
+> 		sprintf(result, "{ \"size\": \"%.2f\", ", mb);
+> 	}
+> 	if (mb / secs < 1.) {
+> 		sprintf(result, "%s\"bandwidth\": \"%.6f\", ", result, mb/secs);
+> 	} else {
+> 		sprintf(result, "%s\"bandwidth\": \"%.2f\", ", result, mb/secs);
+463a481,486
+> 	struct timeval endtv;
+> 	gettimeofday(&endtv,NULL);
+> 	sprintf(result,"%s\"startTime\": %ld, \"retTime\": %ld }\n",result, tv.tv_sec*1000 + tv.tv_usec/1000,
+> 			endtv.tv_sec*1000 + endtv.tv_usec/1000 );
+> 	printf("%s",result);
+> 

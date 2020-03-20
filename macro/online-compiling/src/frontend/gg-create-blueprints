@@ -1,0 +1,119 @@
+#!/bin/bash -ef
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $(basename $0) [-f FILTERS] [-x EXCLUDES] [-t TARGET] [-o OUTLIST] DIRECTORY"
+  exit 1
+fi
+
+# TODO we should lock the index file before changing it
+
+FILTERS_FILE=''
+EXCLUDES_FILE=''
+BLUEPRINTS_HOME=${XDG_CACHE_HOME:-${HOME}/.cache}/gg/blueprints
+NPROC=$(nproc)
+TARGET_BASE=''
+OUTLIST=''
+
+if [ ! -z "${GG_CACHE_DIR}" ]; then
+  BLUEPRINTS_HOME=${GG_CACHE_DIR}/blueprints
+fi
+
+INDEX_FILE=${BLUEPRINTS_HOME}/index
+
+while getopts "x:f:t:o:" opt; do
+  case ${opt} in
+    x )
+      EXCLUDES_FILE=$OPTARG
+      ;;
+    f )
+      FILTERS_FILE=$OPTARG
+      ;;
+    t )
+      TARGET_BASE=$OPTARG
+      ;;
+    o )
+      OUTLIST=$OPTARG
+      ;;
+    \? )
+      echo "Invalid option: -$OPTARG"
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+pushd $1
+SOURCE_DIR=`pwd`/
+popd
+
+FILTERS_OPTS=()
+if [ ! -z "${FILTERS_FILE}" ]; then
+  while read -r FILE
+  do
+    if [ ${#FILTERS_OPTS[@]} -gt 0 ]; then
+      FILTERS_OPTS+=("-o")
+    fi
+    FILTERS_OPTS+=("-ipath" "$FILE")
+  done <${FILTERS_FILE}
+  FILTERS_OPTS=( \( "${FILTERS_OPTS[@]}" \) )
+else
+  FILTERS_OPTS=("-ipath" '*')
+fi
+
+EXCLUDES_OPTS=()
+if [ ! -z "${EXCLUDES_FILE}" ]; then
+  while read -r FILE
+  do
+    EXCLUDES_OPTS+=("-not" "-ipath" "$FILE")
+  done <${EXCLUDES_FILE}
+  EXCLUDES_OPTS=( \( "${EXCLUDES_OPTS[@]}" \) )
+else
+  EXCLUDES_OPTS=()
+fi
+
+mkdir -p ${BLUEPRINTS_HOME}
+
+if [ -z "${TARGET_BASE}" ]; then
+  TEMPDIR=$(mktemp -d)
+else
+  TEMPDIR=$(mktemp -d ${TARGET_BASE}/dest.XXXXXXXX)
+fi
+
+trap "rm -rf $TEMPDIR" EXIT
+
+function process_directory {
+  srcdir=$(realpath -s ${1?source dir is empty})/
+  dstdir=$(realpath -s ${2?destination dir is empty})
+
+  ( find ${srcdir} -type f ${FILTERS_OPTS[@]} -type f ${EXCLUDES_OPTS[@]} |
+      tee ${OUTLIST:-/dev/tty} |
+      xargs -P ${NPROC} -I% -- sh -c \
+        'mkdir -p "'"${dstdir}"'/$(dirname "%")"; HASH=$(gg-hash "%"); echo "// GGHASH:${HASH}" >"'"${dstdir}"'/%"; cat "%" | splice-lines | cpp -fpreprocessed -P -dD -w - 2>/dev/null | prune-file >>"'"${dstdir}"'/%"' ) || true
+
+  ( find ${srcdir} -type l -xtype f ${FILTERS_OPTS[@]} ${EXCLUDES_OPTS[@]} |
+      xargs -P ${NPROC} -I% -- sh -c \
+        'mkdir -p "'"${dstdir}"'/$(dirname "%")"; cp -a "%" "'"${dstdir}"'/%"' ) || true
+
+  ( find ${srcdir} -type l -xtype d |
+      xargs -P ${NPROC} -I% -- sh -c \
+        'mkdir -p "'"${dstdir}"'/$(dirname "%")"; cp -a "%" "'"${dstdir}"'/%"' ) || true
+}
+
+function create_tarball {
+  srcdir=${1?source dir is empty}
+  dsttar=$(mktemp ${TEMPDIR}/output.XXXXXXXX)
+
+  tar zcf ${dsttar} -C ${srcdir} .
+  tar_hash=$(gg-hash ${dsttar})
+  mv ${dsttar} ${BLUEPRINTS_HOME}/${tar_hash}
+
+  echo "${tar_hash}"
+}
+
+TARGET_DIR=$(mktemp -d ${TEMPDIR}/sources.XXXXXXXX)
+
+process_directory "${SOURCE_DIR}" "${TARGET_DIR}"
+TAR_HASH=$(create_tarball "${TARGET_DIR}")
+
+echo "${TAR_HASH} $(readlink -f ${SOURCE_DIR})" >>${INDEX_FILE}
+echo "$(sort -r -k2 ${INDEX_FILE})" >${INDEX_FILE}

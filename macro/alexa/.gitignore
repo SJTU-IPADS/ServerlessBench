@@ -1,0 +1,7 @@
+*.log
+*.zip
+package-lock.json
+skill-sample-nodejs-fact
+skill-sample-nodejs-first-skill
+test
+virtual-alexa

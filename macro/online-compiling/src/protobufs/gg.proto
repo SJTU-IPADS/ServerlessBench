@@ -1,0 +1,34 @@
+syntax = 'proto3';
+
+package gg.protobuf;
+
+message RequestItem {
+  string hash = 1;
+  string data = 2;
+  repeated string outputs = 3;
+}
+
+message ExecutionRequest {
+  repeated RequestItem thunks = 1;
+  string storage_backend = 2;
+  bool timelog = 3;
+}
+
+message OutputItem {
+  string tag = 1;
+  string hash = 2;
+  uint32 size = 3;
+  bool executable = 4;
+  string data = 5;
+}
+
+message ResponseItem {
+  string thunk_hash = 1;
+  repeated OutputItem outputs = 2;
+}
+
+message ExecutionResponse {
+  repeated ResponseItem executed_thunks = 1;
+  uint32 return_code = 2;
+  string stdout = 3;
+}
