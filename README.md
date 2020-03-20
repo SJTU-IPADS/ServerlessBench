@@ -15,8 +15,10 @@ A serverless benchmark suit, with micro and macro test suite, and some evaluatio
 
 - OpenWhisk and `wsk` cli tool.
   Check OpenWhisk configuration to make sure it allows at least **20** containers (action invokers) to execute concurrently, or some test cases (e.g., [Alexa skills application](Represented Workloads)) might stuck and fail due to resource limitation. Similarly, if you modify eval-config to evaluate higher concurrency scenarios, the concurrency limitation from OpenWhisk should also be checked.
-  - create a local.env from the template.local.env (you can simply copy it)
-  - change the configurations in local.env according to your own settings (e.g. IP, port...)
+- CouchDB.
+    Needed for data transfering in representative workloads.
+- Redis.
+    Needed as storage for online-compiling application.
 
 ### Denpendencies
   - `gcc` >= 7.0
@@ -55,6 +57,11 @@ You can install this dependencies in Ubuntu (17.04 or newer) by running:
 
 
 **It's strongly recommended to use Ubuntu 17.04 or newer**
+
+### Environment Variables
+
+First copy and rename `template.local.env` to `local.env`.
+Then fill the missing environemnt variables in `local.env`.
 
 ### Running the Benchmark 
 	
