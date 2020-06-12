@@ -1,0 +1,5 @@
+local.env
+*.csv
+*.log
+*.zip
+*/node_modules

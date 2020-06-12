@@ -1,0 +1,12 @@
+schema_version: 20180708
+name: simple-flow
+version: 0.0.103
+runtime: java
+build_image: fnproject/fn-java-fdk-build:jdk11-1.0.104
+run_image: fnproject/fn-java-fdk:jre11-1.0.104
+cmd: com.example.fn.HelloFunction::handleRequest
+timeout: 300
+triggers:
+- name: simple-flow
+  type: http
+  source: /simple-flow

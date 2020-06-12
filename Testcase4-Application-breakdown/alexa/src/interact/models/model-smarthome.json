@@ -1,0 +1,46 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "space facts",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "EnterHomeIntent",
+          "slots": [
+            {
+                "name": "password",
+                "type": "AMAZON.Artist",
+                "samples": [
+                    "I love {password}",
+                    "{password} had ones of the best videos of all time"
+                  ]
+            }
+          ],
+          "samples": [
+            "I love {password}",
+            "{password} had ones of the best videos of all time"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SmallParamTest
+
+  Sample SAM Template for SmallParamTest
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 300
+
+Resources:
+  HeadFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: code/
+      Handler: head.lambda_handler
+    # Handler: head.lambda_handler_bigparam
+      Runtime: python3.7
+
+  TailFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: code/
+      Handler: tail.lambda_handler
+    # Handler: tail.lambda_handler_bigparam
+      Runtime: python3.7
+
+  StatesExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource: "*"
+
+  CommStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      DefinitionString:
+        !Sub
+          - |-
+            {
+              "Comment": "Test comm Time",
+              "StartAt": "state_start",
+              "States":{
+                "state_start":{
+                  "Type": "Task",
+                  "Resource": "${headfuncArn}",
+                  "Next": "state1"
+                },
+                "state1":{
+                  "Type": "Task",
+                  "Resource": "${tailfuncArn}",
+                  "End": true
+                }
+              }
+            }
+          - {headfuncArn: !GetAtt [ HeadFunction, Arn], tailfuncArn: !GetAtt [ TailFunction, Arn]}
+      RoleArn: !GetAtt [ StatesExecutionRole, Arn ]

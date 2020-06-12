@@ -1,0 +1,98 @@
+* Hari Balakrishnan, who advised this work and came up with the name.
+
+* Paul Williams (www.vt100.net), whose reverse-engineered vt500 state
+  diagram is the basis for the Mosh parser.
+
+* The anonymous users who contributed session logs for tuning and
+  measuring Mosh's predictive echo.
+
+* Nickolai Zeldovich for helpful comments on the Mosh research paper.
+
+* Richard Stallman for helpful discussion about the capabilities of
+  the SUPDUP Local Editing Protocol.
+
+* Nelson Elhage
+
+* Christine Spang
+
+* Stefie Tellex
+
+* Joseph Sokol-Margolis
+
+* Waseem Daher
+
+* Bill McCloskey
+
+* Austin Roach
+
+* Greg Hudson
+
+* Karl Ramm
+
+* Alexander Chernyakhovsky
+
+* Peter Iannucci
+
+* Evan Broder
+
+* Neha Narula
+
+* Katrina LaCurts
+
+* Ramesh Chandra
+
+* Peter Jeremy
+
+* Ed Schouten
+
+* Ryan Steinmetz
+
+* Jay Freeman
+
+* Dave Täht
+
+* Larry Doolittle
+
+* Daniel Drown
+
+* Timo Juhani Lindfors
+
+* Timo Sirainen
+
+* Ira Cooper
+
+* Felix Gröbert
+
+* Luke Mewburn
+
+* Anton Lundin
+
+* Philipp Haselwarter
+
+* Timo J. Rinne
+
+* Barosl Lee
+
+* Andrew Chin
+
+* Louis Kruger
+
+* Jérémie Courrèges-Anglas
+
+* Pasi Sjöholm
+
+* Richard Woodbury
+
+* Igor Bukanov
+
+* Geoffrey Thomas
+
+* Steve Dignam
+
+* HIGUCHI Yuta
+
+* Baruch Siach
+
+* Adrien Destugues
+
+* Giel van Schijndel

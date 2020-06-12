@@ -1,0 +1,185 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "space facts",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AddItemIntent",
+          "slots": [
+            {
+                "name": "item",
+                "type": "Object",
+                "samples": [
+                    "associate {item} with {place}",
+                    "associate the {item} with {place}",
+                    "add {item} to {place}",
+                    "add the {item} to {place}"
+                  ]
+            },
+            {
+                "name": "place",
+                "type": "Place",
+                "samples": [
+                    "associate {item} with {place}",
+                    "associate the {item} with {place}",
+                    "add {item} to {place}",
+                    "add the {item} to {place}"
+                  ]
+            }
+          ],
+          "samples": [
+            "associate {item} with {place}",
+            "associate the {item} with {place}",
+            "add {item} to {place}",
+            "add the {item} to {place}"
+          ]
+        },
+        {
+          "name": "RetrieveItemIntent",
+          "slots": [
+            {
+                "name": "place",
+                "type": "Place",
+                "samples": [
+                    "get items for {place}",
+                    "get items associated with {place}",
+                    "retrieve items for {place}",
+                    "retrieve items associated with {place}",
+                    "what to bring for {place}"
+                  ]
+            }
+          ],
+          "samples": [
+            "get items for {place}",
+            "get items associated with {place}",
+            "retrieve items for {place}",
+            "retrieve items associated with {place}",
+            "what to bring for {place}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+            "name": "Object",
+            "values": [
+                {
+                    "name": {
+                        "value": "key"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "cellphone"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "glasses"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "bottle"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "album"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "towel"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "swimmingsuit"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "sunglasses"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "IDcard"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "wallet"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "camera"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "laptop"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "book"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Place",
+            "values": [
+                {
+                    "name": {
+                        "value": "livehouse"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "bar"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "seashore"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "home"
+                    }
+                },
+                {
+                    "name": {
+                        "value": "work"
+                    }
+                }
+            ]
+        }
+      ]
+    }
+  }
+}

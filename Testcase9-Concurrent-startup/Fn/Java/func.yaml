@@ -1,0 +1,7 @@
+schema_version: 20180708
+name: javafn
+version: 0.0.1
+runtime: java
+build_image: fnproject/fn-java-fdk-build:jdk11-1.0.109
+run_image: fnproject/fn-java-fdk:jre11-1.0.109
+cmd: com.example.fn.HelloFunction::handleRequest

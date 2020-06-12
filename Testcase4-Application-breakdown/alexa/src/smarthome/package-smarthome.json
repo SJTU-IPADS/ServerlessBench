@@ -1,0 +1,19 @@
+{
+  "name": "smarthome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-model": "^1.0.0",
+    "i18next": "^15.0.5",
+    "virtual-core": "^0.1.1",
+    "openwhisk": "^3.18.0",
+    "uuid": "^3.3.3"
+  }
+}

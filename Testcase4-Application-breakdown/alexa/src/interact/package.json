@@ -1,0 +1,17 @@
+{
+  "name": "interact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "virtual-core": "^0.1.1",
+    "openwhisk": "^3.18.0",
+    "uuid": "^3.3.3",
+    "file-system": "^2.2.2"
+  }
+}

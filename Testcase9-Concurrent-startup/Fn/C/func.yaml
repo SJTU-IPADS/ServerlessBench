@@ -1,0 +1,8 @@
+schema_version: 20180708
+name: revfunc
+version: 0.0.1
+runtime: docker
+triggers:
+- name: revfunc
+  type: http
+  source: /revfunc

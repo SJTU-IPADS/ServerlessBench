@@ -1,0 +1,868 @@
+mosh (1.3.2-1) unstable; urgency=medium
+
+  * Version 1.3.2 released to unstable.
+  * Fixes Debian revision inversion of 1.3.1-rc3-1 > 1.3.1-1
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Fri, 21 Jul 2017 14:41:44 -0700
+
+mosh (1.3.1-1) unstable; urgency=medium
+
+  * Version 1.3.1 released to unstable.
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Thu, 20 Jul 2017 17:32:58 -0400
+
+mosh (1.3.1-rc3-1) experimental; urgency=medium
+
+  * Platform support:
+    * Explicitly enable binding to both IPv4 and IPv6 addresses.
+      (Giel van Schijndel)
+
+  * Bug fixes:
+    * In tests, explicitly set 80x24 tmux window, for newer versions
+      of tmux.  (John Hood)
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Wed, 19 Jul 2017 22:27:12 -0400
+
+mosh (1.3.1~rc2-1) experimental; urgency=medium
+
+  * Build fix.
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Fri, 19 May 2017 19:25:51 -0400
+
+mosh (1.3.1~rc1-1) experimental; urgency=medium
+
+  * Platform support:
+    * Restore perl 5.8.8 support for RHEL5.  (Alexander Chernyakhovsky)
+    * Make tests detect UTF-8 locale with a helper executable.  (John Hood)
+    * Don't print /etc/motd on IllumOS.  (John Hood)
+    * Print {,/var}/run/motd.dynamic on Ubuntu.  (John Hood)
+    * Fix build on Haiku. (Adrien Destugues)
+    * Disable unicode-later-combining.test for tmux 2.4.
+      This fixes build failures.  (John Hood)
+
+  * Bug fixes:
+    * Work around JuiceSSH rendering bug.  (John Hood)
+    * Do not move cursor for SCROLL UP and SCROLL DOWN--
+      fixes an issue with tmux 2.4.  (John Hood)
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Thu, 18 May 2017 00:52:01 -0400
+
+mosh (1.3.0-1) unstable; urgency=medium
+
+  * Version 1.3.0 released to unstable.
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Sat, 25 Mar 2017 12:55:31 -0700
+
+mosh (1.3.0~rc3-1) experimental; urgency=medium
+
+  * Workaround for Debian bug #817236 on buildds
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Fri, 03 Mar 2017 02:21:02 -0800
+
+mosh (1.3.0~rc2-1) unstable; urgency=medium
+
+  * New features:
+    * Change website URLs from http://mosh.mit.edu to
+      https://mosh.org.  (Keith Winstein)
+    * Add --no-ssh-pty option for Dropbear compatibility and
+      other issues.
+    * Switch to semantic versioning, making this version 1.3.0
+      instead of 1.2.7.
+
+  * Platform support:
+    * Added nonce-incrementing test.  (Keith Winstein)
+    * Add build-source-package.sh for Debian.  (Keith Winstein)
+    * Fix CPPFLAGS handling possibly causing curses detection
+      failure.  (John Hood)
+    * Add an Appveyor/Cygwin CI build.
+    * Improve warning-flags detection for 'make distcheck'.  (John Hood)
+    * Improve robustness of regression tests.  (John Hood)
+    * Support OpenBSD pledge() sandboxing.  (John Hood)
+    * Use backward-compatible name for AES in
+      AppleCommonCrypto, fixing builds with older OS X SDKs.  (John Hood)
+    * Detect clock_gettime() and CLOCK_MONOTONIC carefully,
+      fixing OS X 10.12 + Xcode 7.3 builds.  (John Hood)
+    * Support older versions of Perl, back to 5.10, fixing
+      RHEL 5 builds. (Anders Kaseorg)
+    * Add a Travis OS X CI and release build.  (John Hood)
+    * Add --help and --version, enabling Automake's
+     'std-options' checks.  (Anders Kaseorg)
+    * Add a simple smoke test not requiring tmux, to help
+      validate builds on older platforms including RHEL 5. (Anders Kaseorg)
+    * Check for presence of clock_gettime() for OS X, where
+      the symbol may not be resolved on older OS X versions.  (John
+      Hood)
+    * Fix a memory alignment issue in OCB with ARM/Neon. (Carlos Cabanero)
+    * Mosh now runs correctly on Bash for Windows with Windows 10
+      Insider builds 15002 and higher. (No change in Mosh)
+    * Other minor platform compatibility fixes for Mosh
+      sources and tests.  (John Hood)
+
+  * Bug fixes:
+    * Work around a pty buffering issue causing failed
+      connections on FreeBSD 11, or with Dropbear.  (John Hood)
+    * Restore '-p 0' option for OS-selected UDP port bindings.  (John Hood)
+    * Shell hygiene fixes, including better quoting of
+      pathnames.  (Anders Kaseorg)
+    * Fix typos in project docs.  (Jakub Wilk)
+    * Fix excess newlines on mosh client startup/shutdown.  (John Hood)
+    * Exit gracefully, closing session, on pty write or
+      ioctl failure.  (John Hood)
+    * Fix two bugs that caused mosh-server to consume
+      excessive CPU in certain circumstances.  (John Hood)
+    * Fix bug that caused text copied from mosh-client to
+      paste as long lines joined by spaces.  (John Hood)
+    * Documentation improvements. (chenxiaoqino, Ashish Gupta)
+    * Use getuid(), not geteuid(), for correct getpw* lookups.  (John Hood)
+
+ -- Keith Winstein <keithw@cs.stanford.edu>  Mon, 06 Feb 2017 23:38:41 -0800
+
+mosh (1.2.6-1) unstable; urgency=low
+
+  * Version 1.2.6 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 10 Aug 2016 01:02:31 -0700
+
+mosh (1.2.5.95rc1-1) unstable; urgency=low
+
+  * Version 1.2.6 released.
+
+  * New features:
+    * Add Travis CI builds for Linux and Mac.  (Anders Kaseorg, others)
+    * Add a --local option to run without ssh.  (John Hood)
+    * Mosh now returns exitstatus reflecting connection success.
+      (John Hood)
+    * Add a end-to-end test suite and many tests.  (John Hood)
+    * Implement timeouts and signals to help address orphaned sessions.
+      (John Hood)
+    * Major rework of Mosh's display differencing/rendering
+      code with much improved performance for slow machines.  (John Hood)
+    * Implement ANSI back/forward tab (CSI CBT, CSI CHT).
+      (John Hood)
+    * Do not start user shell until network session starts.
+      (John Hood)
+    * Add options for more flexible specification of IPv4/IPv6
+      hostname resolution.  (John Hood)
+    * Improved bash completion.  (Steve Dignam, HIGUCHI Yuta)
+    * Add options for different methods of resolving the remote host
+      address, allowing operation without SshProxyCommand.  (John Hood)
+
+  * Platform support:
+    * Add configurable support for Apple Common Crypto and
+      Nettle, in place of OpenSSL.  Implement base64 locally.
+      (John Hood)
+    * Workaround Cygwin select() bug.  (John Hood)
+    * Updates to Debian packaging.  (Anders Kaseorg, Keith Winstein)
+    * Workaround a glibc-2.22 issue causing segfaults on Debian Sid.
+      (John Hood with help from many others)
+    * Prefer c++ to g++, for systems like FreeBSD where g++ is not usable.
+      (John Hood)
+    * Fixes for Illumos Hipster 20151003.  (John Hood)
+    * Disable -Werror for protobuf code, to resolve a new gcc6 warning.
+      (John Hood)
+    * Link test for -fstack-protector-all on an embedded platform.
+      (Baruch Siach)
+    * Resolve issue with bswap64() on FreeBSD-CURRENT with libc++-3.8.0.
+      (John Hood)
+    * Fix issue with RECVTOS error message on client on FreeBSD.
+      (John Hood)
+
+  * Bug fixes:
+    * Remove an assertion causing aborts on Unicode fallback found by
+      fuzzing with afl.  (Keith Winstein)
+    * Fix a server hang with XON/XOFF on BSD systems.  (John Hood)
+    * Fix a typeahead-prediction bug that caused display corruption on
+      urxvt.  (John Hood)
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 23 May 2016 20:43:00 -0400
+
+mosh (1.2.5-2) unstable; urgency=medium
+
+  * debian/rules: Work around protobuf/glibc build problem
+    causing mosh-server segfault. (Closes: #817929) (John Hood)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 23 Mar 2016 22:05:34 -0700
+
+mosh (1.2.5-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/mosh.maintscript: Fix /etc/bash_completion.d/mosh removal, thanks
+    to for the patch Jakub Wilk <jwilk@debian.org> (Closes: #803253)
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 31 Jan 2016 16:19:09 +0100
+
+mosh (1.2.5-1) unstable; urgency=low
+
+  * Version 1.2.5 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 12 Jul 2015 12:42:00 -0400
+
+mosh (1.2.4.95rc2-1) unstable; urgency=low
+
+  * Version 1.2.5 release candidate.
+
+  * New features:
+    * Bind to a specific IP address with --bind-server. (Philipp
+      Haselwarter)
+    * MOSH_ESCAPE_KEY configures escape character.  (Timo
+      J. Rinne)
+    * Support non-roaming IPv6. (Anders Kaseorg)
+    * Implement XTerm mouse mode. (Barosl LEE, Andrew Chin,
+      Louis Kruger)
+    * Report Git revision along with version if available.
+      (John Hood)
+
+  * Platform support:
+    * Add pselect() emulation. (Jérémie Courrèges-Anglas)
+    * OpenBSD, OS X: Fix be64toh-related issues. (Jérémie
+      Courrèges-Anglas)
+    * ARM Neon: fix gcc4.8 compiling problem(Pasi Sjöholm)
+    * NaCl: Conditionally rename main to mosh_main. (Richard
+      Woodbury)
+    * FreeBSD: Token pasting, forkpty(), ARM fixes. (John Hood)
+    * AIX: Implement CTTY grabbing when TIOCSCTTY is missing
+      (Anton Lundin)
+    * OS X: Broaden build support to cover OS X 10.5 through
+      10.10. (John Hood)
+    * Debian: Improve bash-completion install and
+      functionality. (Suggested by Gabriel Filion, John Hood)
+
+  * Bug fixes:
+    * Automake/autoconf workarounds.  (Anders Kaseorg)
+    * mosh-server: Allow startup without PTY.  (Keith Winstein)
+    * network.cc: Properly close old fd on Socket assignment
+      operator. (Thanks to Igor Bukanov)
+    * mosh-server:  Allow startup with zero-window-size PTY.
+      (Igor Bukanov)
+    * AddrInfo: Fix error message generation when node == NULL
+      (Anders Kaseorg)
+    * Timestamp: Prevent integer overflow on Darwin PPC 32-bit
+      (Anders Kaseorg)
+    * scripts/mosh: Fix hang when remote closes the connection
+      (Anders Kaseorg)
+    * Fix issues with parsing of 256-color SGR sequences.
+      (John Hood)
+    * Numerous code hygiene, Coverity, and Clang static analyzer
+      fixes.  (Anders Kaseorg, Geoffrey Thomas, John Hood)
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 08 Jun 2015 22:45:00 -0400
+
+mosh (1.2.4a-1) unstable; urgency=low
+
+  * Eliminate redundant ocb.cc test (fixes build warning on ARM/MIPS/s390)
+  * Add explicit cast to int (fixes build warning on older gcc)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 27 Mar 2013 18:32:33 -0400
+
+mosh (1.2.4-1) unstable; urgency=low
+
+  * Version 1.2.4 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 27 Mar 2013 00:17:39 -0400
+
+mosh (1.2.3.95rc1-1) unstable; urgency=low
+
+  * Version 1.2.4 release candidate
+
+  * New features:
+    * Support port ranges with -p LOWPORT:HIGHPORT (Luke Mewburn)
+    * Ctrl-^ Ctrl-Z suspends mosh client (Nikolai Zeldovich)
+    * mm:ss display of lost-contact times (Kevin Ballard)
+    * Show infobar with control chars when Ctrl-^ is typed
+    * Put terminal in altscreen mode (Anders Kaseorg)
+    * Tell automake/Debian pkg about our checks (Anders Kaseorg)
+
+  * Platform support:
+    * OS X: Script to build a universal package (Peter Iannucci)
+    * FreeBSD: Fix build problems (Jimmy Olgeni)
+    * AIX: port by Anton Lundin
+    * Solaris with system curses (Anton Lundin)
+    * Cygwin and others: eliminate use of IO::Pty (Anton Lundin)
+
+  * Bug fixes:
+    * Fix bug (introduced in 1.2.3) where server stays around
+      if process quits while client is detached
+    * Clean up spurious entries from detached sessions warning
+    * Fix freeze when connectivity is one-directional for hours
+      (reported by Axel Beckert)
+    * Don't wipe title until a new one is set (sqweek)
+    * Eliminate memory leaks and cppcheck warnings (Anders Kaseorg)
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 10 Mar 2013 17:46:37 -0400
+
+mosh (1.2.3-1) unstable; urgency=low
+
+  * Version 1.2.3 released.
+
+  * Update AES-OCB implementation (Keegan McAllister)
+
+  * More conservative MTU and datagram sizing
+
+ -- Keith Winstein <keithw@mit.edu>  Fri, 19 Oct 2012 15:21:54 -0400
+
+mosh (1.2.2.95rc1-1) unstable; urgency=low
+
+  * Security improvements:
+    * Use OpenSSL AES implementation
+    * Don't let bad server dictate IP (Felix Groebert)
+
+  * New features:
+    * Client hops ports to survive challenging client-side firewall
+    * Server stops sending to save client power (Daniel Drown)
+    * Set DiffServ code point and ECN-capable (Dave Täht)
+    * Slow down if explicit congestion notification received
+    * Warn about unattached Mosh sessions on login
+    * Compatible with KDE konsole (uses BEL to terminate OSC)
+    * Improved heuristic about color of predicted characters
+
+  * Bug fixes:
+    * Improved performance on systems with expensive time
+    * No longer choke on "ffff::" address for hosts with IPv6
+
+  * Platform support:
+    * Build on Solaris and IllumOS (Timo Sirainen, Ira Cooper)
+    * Build on ARM with gcc 4.7 (Alexander Chernyakhovsky)
+
+  * Licensing changes:
+    * Allow distribution on Apple App Stores
+    * Allow linking with OpenSSL
+
+ -- Keith Winstein <keithw@mit.edu>  Fri, 05 Oct 2012 19:45:51 -0400
+
+mosh (1.2.2-1) unstable; urgency=low
+
+  * Version 1.2.2 released.
+
+  * Remove warning on out-of-order/duplicated datagrams
+
+  * Add "experimental" prediction mode
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 12 Jun 2012 14:52:17 -0400
+
+mosh (1.2.1-1) unstable; urgency=low
+
+  * Version 1.2.1 released.
+
+  * Warning on out-of-order/duplicated datagrams (or failed nonce increment)
+
+  * Clearer error message on invalid port number
+
+ -- Keith Winstein <keithw@mit.edu>  Fri, 25 May 2012 18:03:31 -0400
+
+mosh (1.2.0.97-1) unstable; urgency=low
+
+  * Cosmetic cleanups to quit sequence when server is firewalled
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 23 May 2012 12:16:47 -0400
+
+mosh (1.2.0.96-1) unstable; urgency=low
+
+  * Include bash_completion file (ejeffrey)
+
+  * Include UFW firewall profile (Fumihito YOSHIDA)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 23 May 2012 07:05:54 -0400
+
+mosh (1.2.0.95-1) unstable; urgency=low
+
+  * Improve performance on lossy links.
+
+  * New diagnostic message when link is dead in only one direction.
+
+  * Use less CPU when link is down. (Keegan McAllister)
+
+  * Use much less CPU when application or mosh-server sends
+    large repeat counts (resolves CVE-2012-2385, reported by
+    Timo Juhani Lindfors).
+
+  * Use less memory when mosh-server is malicious.
+
+  * Fix vttest regression re: wrapping and tabs.
+
+  * Enable roundtrip verifier of terminal emulator correctness
+    when verbose.
+
+  * Remove skalibs as a dependency. (Keegan McAllister)
+
+  * Remove use of poll() and OS X poll workaround. (Keegan McAllister)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 23 May 2012 03:36:13 -0400
+
+mosh (1.2-1) unstable; urgency=low
+
+  * Version 1.2 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Thu, 26 Apr 2012 01:35:59 -0400
+
+mosh (1.1.99b-1) unstable; urgency=low
+
+  * Update THANKS and copyright information
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 25 Apr 2012 02:53:21 -0400
+
+mosh (1.1.99a-1) unstable; urgency=low
+
+  * Fix using broken system poll on OS X 10.6
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 25 Apr 2012 02:30:44 -0400
+
+mosh (1.1.99-1) unstable; urgency=low
+
+  * Fix build problems on FreeBSD 7 and 8
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 24 Apr 2012 23:52:22 -0400
+
+mosh (1.1.98-1) unstable; urgency=low
+
+  * Fix build problems on Cygwin
+
+  * Fix build problems on Debian armel/armhf
+
+  * Fix alignment problems on ARM
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 24 Apr 2012 19:00:03 -0400
+
+mosh (1.1.97-1) unstable; urgency=low
+
+  * Revert use of protobufs' zero-copy gzip stream
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 23 Apr 2012 22:53:44 -0400
+
+mosh (1.1.96-1) unstable; urgency=low
+
+  * Include binary hardening check script in GNU-style tar.gz
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 23 Apr 2012 20:21:14 -0400
+
+mosh (1.1.95-1) unstable; urgency=low
+
+  * Eliminate PPC32 dependence on posix_memalign()
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 22 Apr 2012 23:18:13 -0400
+
+mosh (1.1.94e-1) unstable; urgency=low
+
+  * Improve responsiveness on fast links
+
+  * Include poll implementation for Mac OS X
+
+  * Use protobufs' zero-copy gzip stream
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 22 Apr 2012 16:59:25 -0400
+
+mosh (1.1.94d-1) unstable; urgency=low
+
+  * More helpful locale-related error messages
+
+  * Improve prediction transparency
+
+  * Honor .hushlogin
+
+  * Set PWD to deal with home directories that are symlinks
+
+  * Back off overlay frame rate when all timing tests have fired (saves CPU)
+
+  * -v flag now makes server more verbose
+
+ -- Keith Winstein <keithw@mit.edu>  Thu, 19 Apr 2012 02:44:48 -0400
+
+mosh (1.1.94c-1) unstable; urgency=low
+
+  * Further improved Debian rule to disable conflicting stack protector flags
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 17 Apr 2012 04:17:08 -0400
+
+mosh (1.1.94b-1) unstable; urgency=low
+
+  * Improved Debian rule to disable conflicting stack protector flags
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 17 Apr 2012 03:24:23 -0400
+
+mosh (1.1.94a-1) unstable; urgency=low
+
+  * Bump base version
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 17 Apr 2012 02:36:30 -0400
+
+mosh (1.1.94-2) unstable; urgency=low
+
+  * Disable conflicting Debian/Ubuntu stack protector flags
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 17 Apr 2012 02:15:41 -0400
+
+mosh (1.1.94-1) unstable; urgency=low
+
+  * Release pre-candidate for mosh 1.2
+
+  * Remove Boost as a dependency (Keegan McAllister)
+
+  * More friendly error messages in some common cases
+
+  * Now passes locale-related env vars over the connection
+
+  * Remove skalibs as a depenency on Debian/Ubuntu (Keegan McAllister)
+
+  * Fix startup script to no longer hang on some Macs (Jay Freeman)
+
+  * Fix argument parsing on FreeBSD (Daniel O'Connor)
+
+  * Use binary hardening flags where available (Keegan McAllister)
+
+  * Several improvements to terminal emulation correctness
+
+  * Now prints message of the day (motd)
+
+  * Allows core dumps of subsidiary applications if desired
+
+  * Cleaner execution of subsidiary shell (Jay Freeman)
+
+  * Fix leaking utmp entries (Ed Schouten)
+
+  * Add support for Cygwin (Joshua Pollack)
+
+  * Add support for RHEL/CentOS 5 (Reini Urban)
+
+  * Use less CPU when server's network is down
+
+  * Disable posterization of 256colors to 8 ANSI colors
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 16 Apr 2012 21:16:28 -0400
+
+mosh (1.1.3a-1) unstable; urgency=low
+
+  * Support 16-color escape sequences (Anders Kaseorg)
+
+  * Fix some wraparound glitches
+
+  * Fix escape sequences when server run on BSD and OS X (Peter Jeremy)
+
+  * FreeBSD support (Ben Kaduk)
+
+  * Fixes to build on iOS (Peter Iannucci)
+
+  * Add some tests (Keegan McAllister)
+
+  * Support OS X iTerm with lowercase "utf-8"
+
+  * Avoid unnecessary link with -lncurses when possible (Anders Kaseorg)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 11 Apr 2012 03:36:49 -0400
+
+mosh (1.1.3-1) unstable; urgency=low
+
+  * Version 1.1.3 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 03 Apr 2012 12:33:46 -0400
+
+mosh (1.1.2c-1) unstable; urgency=low
+
+  * Fix bug causing occasional missing (or spurious) wraparound copy-and-paste
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 02 Apr 2012 19:08:19 -0400
+
+mosh (1.1.2b-1) unstable; urgency=low
+
+  * Close connection after four petabytes (per OCB recommendation)
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 31 Mar 2012 17:25:10 -0400
+
+mosh (1.1.2a-1) unstable; urgency=low
+
+  * Fixes to build on armel and armhf (Keegan McAllister)
+
+  * Fix to build on FreeBSD, with warning about broken tty multibyte delete (reported by Christoph Egger)
+
+  * Keep sane values in unused wx_xpixel/wx_ypixel values of struct winsize.
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 31 Mar 2012 15:51:31 -0400
+
+mosh (1.1.2-1) unstable; urgency=low
+
+  * Version 1.1.2 released.
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 28 Mar 2012 18:02:28 +0200
+
+mosh (1.1.1a-1) unstable; urgency=low
+
+  * Fixes to build on OS X 10.5 with older gcc and -lpoll (Quentin Smith)
+
+  * Add --with-utempter and --without-utempter per gentoo req (Michael Weber)
+
+  * configure now requires ncurses headers (and others) to be installed
+
+  * Consolidate locale routines to help Android port (Keegan McAllister)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 28 Mar 2012 15:16:51 +0200
+
+mosh (1.1.1-1) unstable; urgency=low
+
+  * Version 1.1.1 released.
+
+  * Fix spec file and build failure on Fedora.
+
+  * Print out error message properly on fatal_assert().
+
+  * Support for machines without posix_memalign().
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 27 Mar 2012 01:18:26 +0200
+
+mosh (1.1-1) unstable; urgency=low
+
+  * Version 1.1 released
+
+ -- Keith Winstein <keithw@mit.edu>  Thu, 22 Mar 2012 18:40:59 -0400
+
+mosh (1.0.9d-1) unstable; urgency=low
+
+  * Fix bug preventing -p argument from working
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 21 Mar 2012 22:46:51 -0400
+
+mosh (1.0.9c-1) unstable; urgency=low
+
+  * Improved building on Mac OS X (Anders Kaseorg)
+
+  * PRNG (for chaff) now reads from /dev/urandom (Keegan McAllister)
+
+  * Startup script cleanups and fix shell quoting (Anders Kaseorg)
+
+  * Disables core dumps (containing session key) (Keegan McAllister)
+
+  * Improved terminal shutdown and other cosmetic fixes
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 21 Mar 2012 19:23:41 -0400
+
+mosh (1.0.9b-1) unstable; urgency=low
+
+  * More efficient repaint when scrolling top part of window
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 18 Mar 2012 16:37:30 -0400
+
+mosh (1.0.9a-1) unstable; urgency=low
+
+  * Add chaff to datagrams to frustrate statistical analysis of length
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 18 Mar 2012 14:00:11 -0400
+
+mosh (1.0.9-1) unstable; urgency=low
+
+  * Release candidate for version 1.1.
+
+  * Allows user to specify remote command to execute.
+
+  * Only advertises 256 colors when user's terminal has 256 colors.
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 18 Mar 2012 06:06:43 -0400
+
+mosh (1.0.2-1) unstable; urgency=low
+
+  * Version 1.02 released.
+
+  * Uses xterm-256color and supports 256-color escape sequences.
+
+  * Posterizes to 8 colors unless the user has a 256-color terminal.
+
+  * Handles terminals without BCE.
+
+  * Starts login shell.
+
+ -- Keith Winstein <keithw@mit.edu>  Fri, 16 Mar 2012 17:57:45 -0400
+
+mosh (1.0.1-1) unstable; urgency=low
+
+  * Version 1.01 released.
+
+  * Roughly 40% less CPU usage.
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 14 Mar 2012 04:55:11 -0400
+
+mosh (1.0-1) unstable; urgency=low
+
+  * Version 1.0 released.
+
+  * mosh now supports --version option and prints no-warranty message.
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 12 Mar 2012 04:51:43 -0400
+
+mosh (0.98c-1) unstable; urgency=low
+
+  * Fix pointer comparison (Anders Kaseorg)
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 10 Mar 2012 16:50:35 -0500
+
+mosh (0.98b-1) unstable; urgency=low
+
+  * Update README.md
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 10 Mar 2012 14:05:12 -0500
+
+mosh (0.98a-1) unstable; urgency=low
+
+  * Small cleanup to generated terminal output when predictions active
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 10 Mar 2012 06:40:24 -0500
+
+mosh (0.98-1) unstable; urgency=low
+
+  * Version 0.98 released.
+
+  * Add option to select server-side UDP port.
+
+  * Restrict default UDP port range to 60000..61000.
+
+  * Use TERM / terminfo to decide when to send ECH sequence.
+
+  * Now works properly inside tmux.
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 10 Mar 2012 05:45:34 -0500
+
+mosh (0.97-1) unstable; urgency=low
+
+  * Merged Mac OS X port (thanks to Quentin Smith and Anders Kaseorg)
+
+  * Server will quit if no connection within first 60 seconds
+
+  * Startup script no longer requires threaded Perl
+
+  * Add --enable-compile-warnings=error to ./configure
+
+  * Fix some flicker issues with adaptive prediction mode
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 07 Mar 2012 04:17:19 -0500
+
+mosh (0.96a-3) unstable; urgency=low
+
+  * Update copyright file to correct pkg.m4 is GPL-2+ not GPL-2
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 03 Mar 2012 19:06:43 -0500
+
+mosh (0.96a-2) unstable; urgency=low
+
+  * Update copyright file to include public domain files and other licenses
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 03 Mar 2012 14:05:15 -0500
+
+mosh (0.96a-1) unstable; urgency=low
+
+  * Version 0.96a released.
+
+  * Fix build problem on i386
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 26 Feb 2012 13:49:44 -0500
+
+mosh (0.96-1) unstable; urgency=low
+
+  * Version 0.96 released.
+
+  * Compress all instructions with zlib
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 26 Feb 2012 04:40:46 -0500
+
+mosh (0.95-1) unstable; urgency=low
+
+  * Version 0.95 released.
+
+  * Make echo acknowledgment reliable to reduce spurious mispredict detections.
+
+  * Require two dropped heartbeats before showing blue bar of lost contact
+
+  * Print newline before MOSH CONNECT string to make more robust
+
+  * Disable ControlMaster in initial SSH connection so proxy is always used
+
+  * Make retransmissions occur at frame rate for limited time after loss
+
+ -- Keith Winstein <keithw@mit.edu>  Sat, 25 Feb 2012 15:15:59 -0500
+
+mosh (0.94c-1) unstable; urgency=low
+
+  * Move to protobuf (from protobuf-lite) to make build on Ubuntu 10.04
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 20 Feb 2012 00:39:12 -0500
+
+mosh (0.94b-1) unstable; urgency=low
+
+  * Relax autoconf dependency
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 19 Feb 2012 22:55:53 -0500
+
+mosh (0.94a-1) unstable; urgency=low
+
+  * Relax debhelper dependency to make build on Ubuntu 10.04 LTS lucid
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 19 Feb 2012 22:03:03 -0500
+
+mosh (0.94-1) unstable; urgency=low
+
+  * Version 0.94 released.
+
+  * Make man pages.
+
+  * Replace C++11 features (lambda and auto) with boost equivalents
+	        (Anders Kaseorg)
+
+  * Now builds with g++ or clang (with libstdc++)
+
+ -- Keith Winstein <keithw@mit.edu>  Wed, 15 Feb 2012 13:56:11 -0500
+
+mosh (0.93-1) unstable; urgency=low
+
+  * Version 0.93 released.
+
+  * Make utmp entries.
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 13 Feb 2012 05:44:35 -0500
+
+mosh (0.92-1) unstable; urgency=low
+
+  * Version 0.92 released.
+
+  * Allows user to select prediction mode (always/never/adaptive)
+
+  * Fix bug in server startup on slow hosts
+
+  * Better prediction when deleting at line ending
+
+ -- Keith Winstein <keithw@mit.edu>  Mon, 13 Feb 2012 03:53:31 -0500
+
+mosh (0.91a-0ubuntu1) oneiric; urgency=low
+
+  * Add missing dependencies to debian/control
+
+ -- Keith Winstein <keithw@mit.edu>  Thu, 09 Feb 2012 09:34:18 -0500
+
+mosh (0.91-0ubuntu1) oneiric; urgency=low
+
+  * Version 0.91 released.
+
+  * Startup script support SSH options and aliases (Anders Kaseorg)
+
+  * End use of Path MTU discovery and allow IP fragmentation because,
+    e.g., Cisco VPN has MTU of 1200 and does not pass ICMP too-big.
+
+  * Better exception and error handling.
+
+  * Restrict predictive local echo display to long-delay links
+    (>60 ms RTT) or for temporarily after a "glitch." Otherwise simply
+    show server echos, while maintaining prediction overlay in the
+    background in case it is needed.
+
+ -- Keith Winstein <keithw@mit.edu>  Thu, 09 Feb 2012 03:05:45 -0500
+
+mosh (0.9b-0ubuntu1) oneiric; urgency=low
+
+  * Merged Anders Kaseorg fixes to build system
+
+ -- Keith Winstein <keithw@mit.edu>  Tue, 07 Feb 2012 17:27:42 -0500
+
+mosh (0.9a-0ubuntu1) oneiric; urgency=low
+
+  * Edit README
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 05 Feb 2012 03:50:53 -0500
+
+mosh (0.9-0ubuntu1) oneiric; urgency=low
+
+  * Initial release
+
+ -- Keith Winstein <keithw@mit.edu>  Sun, 05 Feb 2012 03:50:53 -0500

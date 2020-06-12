@@ -1,0 +1,3 @@
+#!/bin/bash
+source excamera-vars.sh
+model-generic "${EXCAMERA_BIN_DIR}/xc-dump -S,--input-state=@infile @infile @outfile" "$@"

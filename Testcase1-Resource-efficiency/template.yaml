@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  resource-efficiency
+
+  Testcase1 of serverlessbench.
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 180
+
+Resources:
+  KeyDownloader:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: code/
+      Handler: keyDownloader.lambda_handler
+      Runtime: python3.6
+
+  AluFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: code/
+      Handler: alu.lambda_handler
+      Runtime: python3.6
+  
+  TogetherFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: code/
+      Handler: together.lambda_handler
+      Runtime: python3.6
+  
+  StatesExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource: "*"
+
+  ResourceEfficientStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      DefinitionString:
+        !Sub
+          - |-
+            {
+              "Comment": "Test resource efficiency",
+              "StartAt": "state_start",
+              "States":{
+                "state_start":{
+                  "Type": "Task",
+                  "Resource": "${headfuncArn}",
+                  "Next": "state1"
+                },
+                "state1":{
+                  "Type": "Task",
+                  "Resource": "${tailfuncArn}",
+                  "End": true
+                }
+              }
+            }
+          - {headfuncArn: !GetAtt [ KeyDownloader, Arn], tailfuncArn: !GetAtt [ AluFunction, Arn]}
+      RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
+          
+

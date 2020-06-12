@@ -1,0 +1,360 @@
+hello (2.10-1build1) zesty; urgency=medium
+
+  * No-change rebuild to pick up -fPIE compiler default in static
+    libraries
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 12 Apr 2017 15:47:38 +0000
+
+hello (2.10-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches: Drop 01-fix-i18n-of-default-message, no longer needed.
+  * debian/patches: Drop 99-config-guess-config-sub, no longer needed.
+  * debian/rules: Drop override_dh_auto_build hack, no longer needed.
+  * Standards-Version: 3.9.6 (no changes for this).
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 22 Mar 2015 11:56:00 +0100
+
+hello (2.9-2) unstable; urgency=low
+
+  * Apply patch from Reuben Thomas to fix i18n of default message.
+    This is upstream commit c4aed00. Closes: #767172.
+  * The previous change in src/hello.c trigger a rebuild of man/hello.1
+    that we don't need. Add a "touch man/hello.1" to avoid it.
+  * Use Breaks: hello-debhelper (<< 2.9), not Conflicts,
+    as hello-debhelper is deprecated.
+  * Restore simple watch file from old hello package that was lost
+    when the packages were renamed.
+  * Update 99-config-guess-config-sub patch.
+
+ -- Santiago Vila <sanvila@debian.org>  Thu, 06 Nov 2014 12:03:40 +0100
+
+hello (2.9-1) unstable; urgency=low
+
+  * New upstream release. Closes: #744195.
+  * Source now contains README-dev. Closes: #621716.
+  * Reworded short description.
+  * Renamed source and binary from "hello-debhelper" to "hello".
+  * The hello package will be renamed to "hello-traditional".
+  * The file debian/rules is now the one using dh.
+  * Added appropriate Conflicts/Replaces.
+  * Raised priority to "optional".
+  * Standards-Version: 3.9.5.
+
+ -- Santiago Vila <sanvila@debian.org>  Sat, 12 Apr 2014 15:23:26 +0200
+
+hello-debhelper (2.8-1) unstable; urgency=low
+
+  * New upstream release.
+  * Increase debhelper compatibility level to 9.
+  * Dropped CFLAGS stuff, debhelper already takes care of that.
+  * Dropped dh_auto_clean as it does no longer work. Just make distclean
+    if there is a Makefile. Added override_dh_auto_clean to dh version.
+  * Dropped patch 01-no-usr-share-info-dir-gz. No longer needed
+    when using debhelper >= 9.20120311 with a source package created
+    with a recent automake which supports AM_UPDATE_INFO_DIR.
+  * Updated Build-Depends accordingly.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 27 May 2012 23:28:00 +0200
+
+hello-debhelper (2.7-3) unstable; urgency=low
+
+  * Get CFLAGS from dpkg-buildflags.
+  * Drop -g as it's provided by dpkg-buildflags. Add -Wall as it's not.
+  * Drop noopt handling, dpkg-buildflags already takes care of that.
+  * Added "dh_installdocs NEWS" to dh version to sync with non-dh one.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 26 Feb 2012 12:13:16 +0100
+
+hello-debhelper (2.7-2) unstable; urgency=low
+
+  * Added recommended targets build-arch and build-indep.
+  * Standards-Version: 3.9.2.
+
+ -- Santiago Vila <sanvila@debian.org>  Thu, 04 Aug 2011 13:15:26 +0200
+
+hello-debhelper (2.7-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Santiago Vila <sanvila@debian.org>  Tue, 05 Apr 2011 15:55:06 +0200
+
+hello-debhelper (2.6-2) unstable; urgency=medium
+
+  * Use debhelper compatibility level 8, the new recommended mode.
+
+ -- Santiago Vila <sanvila@debian.org>  Wed, 18 Aug 2010 16:20:38 +0200
+
+hello-debhelper (2.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Switch to 3.0 (quilt) source format. Closes: #574878.
+  * Added a note to debian/rules about the new dh syntax.
+  * Standards-Version: 3.9.1 (no special changes for this).
+
+ -- Santiago Vila <sanvila@debian.org>  Fri, 06 Aug 2010 22:05:00 +0200
+
+hello-debhelper (2.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added homepage field to control file.
+  * Added cross-compilation support, using the new dh_auto_* commands
+    from debhelper 7. Thanks a lot to Colin Watson. Closes: #550328.
+  * Standards-Version: 3.8.4 (no special changes for this).
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 14 Feb 2010 18:41:54 +0100
+
+hello-debhelper (2.4-3) unstable; urgency=low
+
+  * Modified doc/Makefile.in to avoid /usr/share/info/dir.gz.
+
+ -- Santiago Vila <sanvila@debian.org>  Sun, 30 Aug 2009 13:07:00 +0200
+
+hello-debhelper (2.4-2) unstable; urgency=low
+
+  * Handle info files using dh_installinfo and ${misc:Depends}.
+  * Removed debian/prerm and debian/postinst, no longer needed.
+  * Standards-Version: 3.8.3.
+
+ -- Santiago Vila <sanvila@debian.org>  Wed, 26 Aug 2009 17:08:00 +0200
+
+hello-debhelper (2.4-1) unstable; urgency=low
+
+  * New upstream release. Manual is back.
+  * Standards-Version: 3.8.2 (no changes for this).
+
+ -- Santiago Vila <sanvila@debian.org>  Mon, 03 Aug 2009 23:39:04 +0200
+
+hello-debhelper (2.2-3) unstable; urgency=low
+
+  * Run "make distclean" only if Makefile exists, but do not ignore errors.
+  * Use debhelper compatibility level 7, as that's the level newly
+    created packages are supposed to use.
+
+ -- Santiago Vila <sanvila@debian.org>  Fri, 28 Nov 2008 17:15:38 +0100
+
+hello-debhelper (2.2-2) unstable; urgency=low
+
+  * Removed dh_testroot call, as it's not debian/rules job.
+
+ -- Santiago Vila <sanvila@debian.org>  Wed, 11 Apr 2007 08:09:00 +0200
+
+hello-debhelper (2.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Repackaged source taken from hello package.
+  * Removed prerm and postinst, as info files are missing now.
+
+ -- Santiago Vila <sanvila@debian.org>  Sat,  9 Dec 2006 17:00:14 +0100
+
+hello-debhelper (2.1.1-4) unstable; urgency=low
+
+  * Removed dh_testdir from debian/rules, as it is not very useful.
+  * Standards-Version: 3.7.2 (no changes for this).
+  * Updated config.guess and config.sub.
+  * Use debhelper compatibility level 5, as that's the level newly
+    created packages are supposed to use.
+
+ -- Santiago Vila <sanvila@debian.org>  Tue, 18 Jul 2006 19:57:10 +0200
+
+hello-debhelper (2.1.1-3) unstable; urgency=low
+
+  * Created debian/compat with "4" as contents.
+  * Build-Depends: debhelper (>= 4) accordingly.
+  * Things are now installed in debian/hello-debhelper, not debian/tmp.
+  * Updated config.guess and config.sub for GNU/K*BSD.
+
+ -- Santiago Vila <sanvila@debian.org>  Mon,  5 Jan 2004 16:45:52 +0100
+
+hello-debhelper (2.1.1-2) unstable; urgency=low
+
+  * The "Ockham's Razor" release.
+  * Modified Makefile.in to make sure that install-info is never called
+    during the build. This is a workaroud for an automake bug which makes
+    packages to contain /usr/share/info/dir.gz.
+  * Removed misleading comment at the top of debian/rules, this one is
+    a complete rewrite, not a modification, from the hello debian/rules.
+  * Removed debian/rules commented out calls to dh_* tools. Some of them
+    (like dh_suidregister) were deprecated, others (like dh_dirsizes)
+    do not even exist now. Use dh_make (from the dh-make package) if you
+    want a debian/rules full of comments.
+  * Removed build-arch and build-indep targets, there was a circular
+    dependency between them and the build target and IMHO this should not be
+    a full tutorial on writing debian/rules but a simple example instead.
+  * Removed install-arch and install-indep targets, for the same reason.
+  * Made install target to depend on the build target, as it should be.
+  * Standards-Version: 3.6.1 (no changes required for this).
+
+ -- Santiago Vila <sanvila@debian.org>  Wed,  8 Oct 2003 13:42:20 +0200
+
+hello-debhelper (2.1.1-1) unstable; urgency=low
+
+  * New upstream release. GNU hello now says `Hello, world!' in a lot of
+    different languages, using gettext. See the NEWS file for details.
+  * Fixed spelling error in extended description (Closes: #124734).
+  * The upstream source now contains install-sh (Closes: #59162).
+  * The info file is now installed under the "Development" section.
+  * It already has a description, so --description isn't used anymore.
+  * Removed deprecated emacs stuff from the Debian changelog.
+  * Removed debian/hello.1, since there is now an upstream manpage.
+  * Downgraded priority to extra, since it conflicts with hello which
+    is optional. In fact, this package is only useful to be apt-get sourced.
+  * Standards-Version: 3.5.7:
+  - Added support for noopt in DEB_BUILD_OPTIONS
+    (dh_strip already cares about nostrip).
+  - Removed #DEBHELPER# from prerm and postinst since it was only useful
+    for the doc symlinks, which we don't want to manage anymore.
+  - Build-Depends: debhelper.
+  * New maintainer (thanks, Adam).
+
+ -- Santiago Vila <sanvila@debian.org>  Sat, 12 Oct 2002 21:11:12 +0200
+
+hello-debhelper (1.3-18) unstable; urgency=low
+
+  * Made all binary targets depend eventually on build.  Closes: #57650.
+
+ -- Adam Heath <doogie@debian.org>  Thu, 19 Oct 2000 02:53:02 -0500
+
+hello-debhelper (1.3-17) frozen unstable; urgency=low
+
+  * Changed description, so that it described the differences
+    between the normal version of hello and this.  Closes: #50590.
+  * Changed the location of the gpl in the copyright.
+
+ -- Adam Heath <doogie@debian.org>  Mon, 17 Jan 2000 17:25:54 -0600
+
+hello-debhelper (1.3-16) unstable; urgency=low
+
+  * Added build depends.
+  * Added #DEBHELPER# to postinst and prerm(blush).
+  * Now, thanks to debhelper, the /usr/doc -> ../share/doc symlinks
+    are created.
+
+ -- Adam Heath <doogie@debian.org>  Sat,  4 Dec 1999 03:54:10 -0600
+
+hello-debhelper (1.3-15) unstable; urgency=low
+
+  * Updated to standards version 3.0.1.0, and now FHS compliant.
+
+ -- Adam Heath <doogie@debian.org>  Sat, 18 Sep 1999 05:20:15 -0500
+
+hello-debhelper (1.3-14.3) unstable; urgency=low
+
+  * Split and ported to debhelper, so that it can be a learning
+    experience by comparing the normal and enhanced way of doing
+    things.
+  * This version parallels hello 1.3-14.3.
+
+ -- Adam Heath <doogie@debian.org>  Sun,  4 Oct 1998 03:18:23 -0500
+
+hello (1.3-14.2) unstable; urgency=low
+
+  * Yet another non-maintainer release
+  * Removed source and diff targets (#14601). I'm not removing the comment
+    (which would fix #14602) as it's harmless and slightly interesting IMO.
+  * Fixed calling of make install; I ignored this bug last time as I didn't
+    understand it. Having realised what it meant, I agree that it needed
+    changing (#4967)
+
+ -- Mark Baker <mbaker@iee.org>  Sun, 16 Nov 1997 18:11:03 +0000
+
+hello (1.3-14.1) unstable; urgency=low
+
+  * Non-maintainer release
+  * Remove section and priority lines for binary, i.e. undoing the
+    "fix" for the non-bug #4816
+  * Yes, I do know that the previous release should have been numbered
+    1.3-13.1
+
+ -- Mark Baker <mbaker@iee.org>  Sun, 16 Nov 1997 17:16:10 +0000
+
+hello (1.3-14) unstable; urgency=low
+
+  * Non-maintainer release
+  * Add section and priority lines for binary (#4816)
+  * Change comment in debian/rules (#4968)
+  * Remove debian/substvars on clean (#4371)
+  * Fix hang when looking for mailbox (#4375)
+  * Search FSSTND and FHS locations for mail
+  * Compile for libc6
+
+ -- Mark Baker <mbaker@iee.org>  Fri, 14 Nov 1997 22:40:39 +0000
+
+hello (1.3-13) unstable; urgency=low
+
+  * Updated to Standards-Version 2.1.1.0 (no changes required).
+  * Changed maintainer email address.
+
+ -- Ian Jackson <ian@chiark.greenend.org.uk>  Thu, 12 Sep 1996 01:30:34 +0100
+
+hello (1.3-12) unstable; urgency=low
+
+  * Added Debian and upstream changelogs to binary package.
+  * Updated to Standards-Version 2.1.0.0.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Sun, 1 Sep 1996 16:02:23 +0100
+
+hello (1.3-11) unstable; urgency=low
+
+  * Maintainer scripts now `set -e' (even though only 1 command in each).
+  * debian/rules has separate binary, binary-arch, binary-indep targets.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Thu, 22 Aug 1996 15:37:25 +0100
+
+hello (1.3-10) experimental; urgency=low
+
+  * Use new shared library dependencies and dpkg-gencontrol scheme.
+  * `source' and `diff' removed from .PHONY and now print message.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Tue, 20 Aug 1996 15:42:27 +0100
+
+hello (1.3-9) experimental; urgency=LOW
+
+  * changelog specifies `debian-changelog-mode', not `dpkg-...'.
+  * Comment in debian/rules re missing (obsolete) `source', `diff' &c.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Sat, 10 Aug 1996 22:23:39 +0100
+
+hello (1.3-8) experimental; urgency=LOW
+
+  * debian/changelog has local variables section to set Emacs mode.
+  * debian/rules mkdir replaced with install -d for consistency.
+  * debian/rules INSTALL setting to use -s changed to INSTALL_PROGRAM.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Fri, 9 Aug 1996 23:59:37 +0100
+
+hello (1.3-7) experimental; urgency=LOW
+
+  * Changed to new source packing scheme.
+
+ -- Ian Jackson <ian@chiark.chu.cam.ac.uk>  Tue, 6 Aug 1996 02:22:38 +0100
+
+hello (1.3-6); priority=LOW
+
+  * Changed to ELF and added Pre-Depends.
+  * Added Architecture field to control file.
+
+ -- Ian Jackson <iwj10@cus.cam.ac.uk>  Thu, 14 Mar 1996 02:04:36 +0000
+
+hello (1.3-4); priority=LOW
+
+  * Added extended description.
+
+ -- Ian Jackson <iwj10@cus.cam.ac.uk>  Fri, 28 Jul 1995 21:33:04 +0100
+
+Hello 1.3 Debian 3 - iwj
+
+* Corrected some mistakes in debian.README.
+* Added Package_Revision field to `control' file.
+* Added --quiet to install-info invocations.
+* Generalised and commented debian.rules a bit more.
+* Put debian.rules into the public domain.
+* Removed debian.rules install target.
+* Added this Changelog.
+* Added Info manual copyright to debian.README.
+
+Hello 1.3 Debian 2 - iwj
+* New prerm script which calls install-info --remove.
+
+Hello 1.3 Debian 1 - iwj
+Initial release.

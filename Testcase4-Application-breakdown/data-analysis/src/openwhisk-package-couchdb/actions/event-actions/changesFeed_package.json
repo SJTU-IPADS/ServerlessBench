@@ -1,0 +1,9 @@
+{
+  "name": "changesFeed",
+  "version": "1.0.0",
+  "main": "changes.js",
+  "dependencies" : {
+    "openwhisk": "^3.18.0",
+    "request": "^2.88.0"
+  }
+}

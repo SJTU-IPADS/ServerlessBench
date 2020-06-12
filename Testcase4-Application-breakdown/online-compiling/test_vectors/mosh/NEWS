@@ -1,0 +1,26 @@
+2012-04-26
+----------
+
+* Version 1.2 released
+
+2012-03-22
+----------
+
+* Version 1.1 released
+
+2012-03-12
+----------
+
+* Version 1.0 released
+
+2012-03-07 Release candidate (0.97):
+------------------------------------
+
+* Now builds on Mac OS X as well as GNU/Linux
+
+2012-02-06 Initial release (0.9):
+---------------------------------
+
+* Supports intermittent connectivity
+* Supports client and server IP roaming
+* Local echo supports typing and the left and right arrow keys

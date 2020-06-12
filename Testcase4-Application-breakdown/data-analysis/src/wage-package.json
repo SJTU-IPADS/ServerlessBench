@@ -1,0 +1,10 @@
+{
+  "name": "wage-insert",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "nano": "^8.1.0",
+    "openwhisk": "^3.18.0",
+    "node-input-validator": "^4.1.0"
+  }
+}
