@@ -1,0 +1,150 @@
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.89 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+52.24	48	55	62	68	226
+throughput (n/s):
+528.26
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.44 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+45.36	44	48	53	58	73
+throughput (n/s):
+693.00
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.39 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.84	44	48	51	55	69
+throughput (n/s):
+718.91
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.38 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.17	44	47	50	54	70
+throughput (n/s):
+725.16
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.39 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.82	44	47	51	54	70
+throughput (n/s):
+719.94
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.40 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.64	44	48	52	55	71
+throughput (n/s):
+714.80
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.40 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.32	44	47	51	54	71
+throughput (n/s):
+714.80
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.40 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.13	43	47	51	54	72
+throughput (n/s):
+715.31
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.39 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.52	43	47	51	55	74
+throughput (n/s):
+719.94
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.77 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+51.25	48	54	60	64	210
+throughput (n/s):
+566.25
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.44 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+45.27	44	48	52	55	75
+throughput (n/s):
+695.41
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.43 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+45.48	44	48	53	56	76
+throughput (n/s):
+699.79
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.39 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.52	44	47	51	54	70
+throughput (n/s):
+717.36
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.40 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.05	43	47	50	53	69
+throughput (n/s):
+714.29
+
+
+------------------ (concurrent)result ---------------------
+client: 40, loop_times: 25, warup_times: 1
+1000 requests finished in 1.40 seconds
+latency (ms):
+avg	50%	75%	90%	95%	99%
+44.08	43	47	51	54	67
+throughput (n/s):
+716.85
