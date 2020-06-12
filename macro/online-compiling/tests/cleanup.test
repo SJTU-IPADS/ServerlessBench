@@ -1,3 +1,0 @@
-#!/bin/bash -xe
-
-rm -rf ${TMPDIR_ROOT}

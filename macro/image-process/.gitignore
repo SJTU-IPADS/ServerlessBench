@@ -1,9 +1,0 @@
-*.log
-.idea/
-*.iml
-*/*.iml
-target/
-*/target/
-output_file
-*.zip
-thumbnail-try/*

@@ -1,1 +1,0 @@
-SUBDIRS = fibonacci gtest viddec
