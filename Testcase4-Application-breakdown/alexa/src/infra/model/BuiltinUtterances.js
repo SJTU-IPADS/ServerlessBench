@@ -1,26 +1,15 @@
-// Holder class for utterances for builtin intents
-// This could have been done as just a JSON file, but then requires build tool to include it in the lib dir
-/*export class BuiltinUtterances {
-    public static values(): {[id: string]: string[]} {
-        return values;
-    }
-}
+/*
+ * Copyright (c) 2020 Institution of Parallel and Distributed System, Shanghai Jiao Tong University
+ * ServerlessBench is licensed under the Mulan PSL v1.
+ * You can use this software according to the terms and conditions of the Mulan PSL v1.
+ * You may obtain a copy of Mulan PSL v1 at:
+ *     http://license.coscl.org.cn/MulanPSL
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+ * PURPOSE.
+ * See the Mulan PSL v1 for more details.
+ */
 
-export const AudioPlayerIntents = [
-    "AMAZON.PauseIntent",
-    "AMAZON.ResumeIntent",
-    "AMAZON.CancelIntent",
-    "AMAZON.LoopOffIntent",
-    "AMAZON.LoopOnIntent",
-    "AMAZON.NextIntent",
-    "AMAZON.PreviousIntent",
-    "AMAZON.RepeatIntent",
-    "AMAZON.ShuffleOffIntent",
-    "AMAZON.ShuffleOnIntent",
-    "AMAZON.StartOverIntent",
-];*/
-
-//const values = {
 const BuiltinUtterances = {
     "AMAZON.CancelIntent": ["cancel", "never mind"],
     "AMAZON.HelpIntent": ["help", "help me"],

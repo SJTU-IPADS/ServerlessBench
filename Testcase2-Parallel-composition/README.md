@@ -30,3 +30,6 @@ Use aws-cli to invoke the functions use the command below (don't forget to repla
 ```bash
 aws lambda invoke --function-name $YourFunctionArn --payload file://events/aluEvent.json --cli-binary-format raw-in-base64-out response.json
 ```
+
+## NOTICE
+This workload refers to the helloworld project created by `sam init` command, which is licensed by Apache License 2.0

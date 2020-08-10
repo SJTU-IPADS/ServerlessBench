@@ -22,3 +22,6 @@ After deployed, you can see the functions at lambda console, and a step function
     python3 payloadCreater.py
     ```
 2. Invoke the functions by the step function (CommStateMachine), with the created payload as the parameter.
+
+## NOTICE
+This workload refers to the helloworld project created by `sam init` command, which is licensed by Apache License 2.0

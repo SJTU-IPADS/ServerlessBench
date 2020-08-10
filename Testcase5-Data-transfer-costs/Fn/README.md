@@ -21,3 +21,6 @@ echo $PARAM_SIZE | fn invoke flow101 simple-flow
 ./com-tests.sh
 ```
 The communication times for each `PARAM_SIZE` configuration is listed in result-`PARAM_SIZE`.csv files
+
+## NOTICE
+The Fn workload refers to the helloworld project of Fnproject (https://github.com/fnproject), which is licensed by Apache License 2.0

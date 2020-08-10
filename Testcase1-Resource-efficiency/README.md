@@ -34,3 +34,6 @@ aws lambda invoke --function-name $YourFunctionArn --payload file://events/aluEv
 ```
 
 Use the step function (ResourceEfficientStateMachine) to run two functions (KeyDownloader, AluFunction) sequentially. 
+
+## NOTICE
+This workload refers to the helloworld project created by `sam init` command, which is licensed by Apache License 2.0

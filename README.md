@@ -1,3 +1,5 @@
+![ServerlessBench logo](logo.png)
+## <!-- render a nicely looking grey line to separate the logo from the content  -->
 # ServerlessBench
 **This is an anonymous repo for Serverless Bench (submitted paper).**
 
