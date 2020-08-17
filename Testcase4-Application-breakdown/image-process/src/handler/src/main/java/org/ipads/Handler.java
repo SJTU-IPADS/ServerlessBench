@@ -64,6 +64,7 @@ public class Handler {
         commTimes.add(0);
         response.add("commTimes", commTimes);
 
+        // Multiple logs are expected in retry cases
         try {
             String imageName = args.get(ImageProcessCommons.IMAGE_NAME).getAsString();
             Database db = ClientBuilder.url(new URL(couchdb_url))
