@@ -1,9 +1,11 @@
 ![ServerlessBench logo](logo.png)
 ## <!-- render a nicely looking grey line to separate the logo from the content  -->
 # ServerlessBench
-**This is an anonymous repo for Serverless Bench (submitted paper).**
+> **The repo is not officially open-source yet.**
 
-A benchmark suite with serverless workloads.
+A benchmark suite with serverless workloads. 
+
+*Our work has been accepted by SoCC' 20. The paper will be available soon.*
 
 
 ## Test Cases
