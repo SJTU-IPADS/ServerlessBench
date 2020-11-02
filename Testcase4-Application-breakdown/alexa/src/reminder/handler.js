@@ -106,7 +106,7 @@ function addItem(item, place, url, dbname) {
 
     var reminder = couchdbOrError.use(dbname);
 
-    var speakOutput = 'associated ' + item + ' with ' + place;
+    var speakOutput;
 
     return new Promise(function(resolve, reject) {
         reminder.get(place, function(error, body) {
@@ -131,7 +131,7 @@ function addItem(item, place, url, dbname) {
                     console.log('modified body: ' + JSON.stringify(body));
                     reminder.insert(body)
                         .then(function (response) {
-                            speakOutput += ', appended items: ' + JSON.stringify(body['items']);
+                            speakOutput = place + ' is associated with items: ' + JSON.stringify(body['items']);
                             resolve(speakOutput);
                         })
                         .catch(function (err) {
@@ -139,7 +139,7 @@ function addItem(item, place, url, dbname) {
                         })
                 } else {
                     console.log('item already exists, return');
-                    speakOutput += ', they already associated: ' + JSON.stringify(body);
+                    speakOutput = place + ' is associated with items: ' + JSON.stringify(body['items']);
                     resolve(speakOutput);
                 }
             } else {
@@ -149,7 +149,7 @@ function addItem(item, place, url, dbname) {
                     console.log('inserting doc: ', JSON.stringify(items));
                     reminder.insert(items, place)
                         .then(function (response){
-                            speakOutput += ', newly inserted items: ' + JSON.stringify(items);
+                            speakOutput = place + ' is associated with items: ' + JSON.stringify(items);
                             resolve(speakOutput);
                         })
                         .catch(function (err) {
