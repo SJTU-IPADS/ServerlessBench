@@ -10,4 +10,4 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-wsk -i action invoke ParamPassSeq --param-file payload_$1.json --blocking --result
+wsk -i action invoke ParamPassSeq --param-file payload/payload_$1.json --blocking --result
