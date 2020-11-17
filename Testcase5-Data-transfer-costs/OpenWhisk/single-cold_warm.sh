@@ -19,12 +19,21 @@ do
     TIMES=20
     LATENCYSUM=0
     LOGFILE="test-results/Result-$payload_size.csv"
+    
+    # Create payload file
+    python3 payloadCreater.py $payload_size
+    PAYLOADFILE=payload/payload_$payload_size.json
     echo "Payload size: $payload_size"
     echo "Log file: $LOGFILE"
+    if [[ ! -e $LOGFILE ]]; then
+        echo "logfile $LOGFILE does not exist, create it"
+        touch $LOGFILE
+    fi
+    
     for i in $(seq 1 $TIMES)
     do
         invokeTime=`date +%s%3N`
-        rawres=`wsk -i action invoke ParamPassSeq --param-file payload_$payload_size.json --blocking --result` 
+        rawres=`wsk -i action invoke ParamPassSeq --param-file $PAYLOADFILE  --blocking --result` 
         latency=`echo $rawres | jq -r '.comTime'`
         echo $latency
         echo $latency >> $LOGFILE
@@ -32,6 +41,8 @@ do
         LATENCIES[$i]=$latency
         echo "time $i finished"
     done
+
+    rm $PAYLOADFILE
 
     # Sort the latencies
     for((i=0; i<$TIMES+1; i++)){

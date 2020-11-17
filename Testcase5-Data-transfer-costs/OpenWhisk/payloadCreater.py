@@ -9,8 +9,15 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 
-payload_size = int(input("please input the payload size (Byte): "))
-param = "{\n\t\"payload\":"
-f = open("payload_%d.json" %payload_size, 'w')
-f.write(param + "\"%s\"\n}" %(payload_size * '0'))
+# Usage: python3 payloadCreater.py $payload_size
+# Otherwise, user has to manually input the payload
+import sys
 
+payload_size = 0
+if len(sys.argv) == 2 and str.isdigit(sys.argv[1]) and int(sys.argv[1]) >= 0:
+    payload_size = int(sys.argv[1])
+else:
+    payload_size = int(input("please input the payload size (Byte): "))
+param = "{\n\t\"payload\":"
+f = open("payload/payload_%d.json" %payload_size, 'w')
+f.write(param + "\"%s\"\n}" %(payload_size * '0'))
