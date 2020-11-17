@@ -8,6 +8,9 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
+
+# Usage: python3 payloadCreater.py $payload_size
+# Otherwise, user has to manually input the payload
 import sys
 
 payload_size = 0

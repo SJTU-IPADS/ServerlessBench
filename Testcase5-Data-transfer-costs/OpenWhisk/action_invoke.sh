@@ -10,4 +10,7 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
+
+# Usage: ./action_invoke.sh $payload_size
+# The payload should be pre-created by payloadCreater.py
 wsk -i action invoke ParamPass --param-file payload/payload_$1.json --blocking --result
