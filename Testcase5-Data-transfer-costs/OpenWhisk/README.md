@@ -9,7 +9,8 @@
     > Don't forget that `action_invoke.sh` and `sequence_invoke.sh` need pre-created payloads
 * Quick start:
     ```bash
-    # now pwd is .../Testcase5-Data-transfer-costs/OpenWhisk
+    # Now pwd is .../Testcase5-Data-transfer-costs/OpenWhisk
+    # Two subdirectories: `payload/`, `test-results` needs to be pre-created to store the generated payload and log files 
     ./action_update.sh
     ./single-cold_warm.sh
     ```
