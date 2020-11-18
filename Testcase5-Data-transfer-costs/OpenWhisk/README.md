@@ -10,7 +10,7 @@
 * Quick start:
     ```bash
     # Now pwd is .../Testcase5-Data-transfer-costs/OpenWhisk
-    # Two subdirectories: `payload/`, `test-results` needs to be pre-created to store the generated payload and log files 
+    # Two subdirectories, `payload/` and `test-results/`, need to be pre-created to store the generated payload and log files 
     ./action_update.sh
     ./single-cold_warm.sh
     ```
