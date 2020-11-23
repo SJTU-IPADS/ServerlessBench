@@ -1,8 +1,13 @@
 import time
 import json
 from subprocess import call
-import random
 import os, stat
+import utils
+
+global memCDFFilename, execCDFFilename
+memCDFFilename  = "CDFs/memCDF.csv"
+execCDFFilename = "CDFs/execTimeCDF.csv"
+
 def main(args):
     """Main."""
     startTime = time.time()
@@ -13,47 +18,32 @@ def main(args):
         sequence += 1
     
     memSize = mallocRandMem()
-    
+    execTime = execRandTime()
     
     return { 'sequence': sequence,
         'startTime': int(round(startTime * 1000)),
-        'memSize': memSize
+        'memSize': memSize,
+        'execTime': execTime
     }
 
 def mallocRandMem():
-    filename = "memCDF.csv"
-    fCDF = open(filename, 'r')
-    mems = []
-    P = []
-    for line in fCDF:
-        lineSplit = line.split(",")
-        mems.append(int(lineSplit[0]))
-        P.append(float(lineSplit[1]))
-    
-    randP = random.random()
-    randMem = 0 #initialization
-    for pindex in range(len(P)):
-        if P[pindex] >= randP:
-            randMem = mems[pindex]
-            break
+    filename = memCDFFilename
+    bias = 30
+    randMem = utils.getRandValueRefByCDF(filename) - bias
     print("Alloc random memory: %d" %(randMem))
     os.chmod("./function",stat.S_IRWXU)
     call(["./function","%s" %randMem])
     return randMem
-            
+
+def execRandTime():
+    filename = execCDFFilename
+    randExecTime = utils.getRandValueRefByCDF(filename)
+    utils.alu(randExecTime)
+    print("Execute random time: %d" %(randExecTime))
+    return randExecTime
+
 # # Use to debug
 if __name__ == '__main__':
+    memCDFFilename = "CDFs/memCDF.csv"
+    execCDFFilename="CDFs/execTimeCDF.csv"
     mallocRandMem()
-
-
-# def binarySearch(arr, l, r, x):
-#     if r >= l: 
-#         mid = int(l + (r - l)/2)  
-#         if arr[mid] >= x and arr[mid - 1] < x: 
-#             return mid 
-#         elif arr[mid - 1] >= x: 
-#             return binarySearch(arr, l, mid-1, x) 
-#         else: 
-#             return binarySearch(arr, mid+1, r, x) 
-#     else:
-#         return 0

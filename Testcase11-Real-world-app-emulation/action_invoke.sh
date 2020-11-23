@@ -10,5 +10,5 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-wsk -i action invoke func --result --blocking -p name Messi
+wsk -i action invoke func --result --blocking 
 

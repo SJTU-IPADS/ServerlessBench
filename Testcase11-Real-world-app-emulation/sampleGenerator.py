@@ -22,7 +22,7 @@ def chainLenSampleListGen(sampleNum):
 # parse the CDF file, return the list of each x (x is length in the CDF), 
 # and the dictionary of x:F(x) 
 def parseChainLenCDFFile():
-    filename = "chainlenCDF.csv"
+    filename = "../CDFs/chainlenCDF.csv"
     f = open(filename, 'r')
     f.readline()
     lengthList = []
@@ -39,7 +39,7 @@ def parseChainLenCDFFile():
 # Generate the script to create the samples on OpenWhisk
 def sampleActionGen(chainLenSampleList):
     sampleNum = len(chainLenSampleList)
-    # TODO: now function name is hard coded
+    # TODO: now function name is hard coded, and it should be pre-created
     funcName = 'func'
     for i in range(sampleNum):
         appName = "app%d" %i
