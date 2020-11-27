@@ -62,7 +62,7 @@ def Invoke(appName, results):
     
     # Actually the while loop will be break inside
     while(testTime > 0):
-        print("[Emulate] app %s invoke, time remains: %d s" %appName, testTime)
+        print("[Emulate] app %s invoke, time remains: %d s" %(appName, testTime))
         latency = callInvoke(appName)
         result['latencies'].append(latency)
         
