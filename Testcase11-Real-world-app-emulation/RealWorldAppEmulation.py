@@ -127,24 +127,9 @@ def generateInvokes():
     resultFile.close()
     testEndTime = getTime()
     print("-----------------------")
-    print("Test duration: %.2f s", (testEndTime - testStartTime) / MILLISECONDS_PER_SECOND)
+    duration = (testEndTime - testStartTime) / MILLISECONDS_PER_SECOND
+    print("Test duration: %.2f s" %duration)
     print("Test finished")
-
-def test():
-    count = 0
-    for i in range(100):
-        IAT = getRandAvgIAT()
-        if IAT >= TOTAL_RUN_TIME:
-            count+=1
-        print(IAT)
-    print(count)
-
-def test1():
-    IAT = getRandAvgIAT()
-    cv = getRandCV()
-    print("IAT, cv: %.2f, %.2f" %(IAT, cv))
-    for i in range(100):
-        print(getRandomIAT(IAT, cv))
 
 if __name__ == "__main__":
     generateInvokes()
