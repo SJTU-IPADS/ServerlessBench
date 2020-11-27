@@ -53,8 +53,7 @@ def sampleActionGen(chainLenSampleList):
         funcChainStr = ""
         # Create functions in the app
         for functionID in range(length):
-            actionUpdateScript = os.path.join(os.path.dirname(__file__), 'action_update.sh')
-            cmd = "%s %d %d" %(actionUpdateScript, sequenceID, functionID)
+            cmd = "./action_update.sh %d %d" %(sequenceID, functionID)
             r = os.popen(cmd)
             r.read()
 
