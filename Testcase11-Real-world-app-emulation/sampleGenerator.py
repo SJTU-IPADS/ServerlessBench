@@ -22,7 +22,7 @@ def chainLenSampleListGen(sampleNum):
 # parse the CDF file, return the list of each x (x is length in the CDF), 
 # and the dictionary of x:F(x) 
 def parseChainLenCDFFile():
-    filename = "../CDFs/chainlenCDF.csv"
+    filename = os.path.join(os.path.dirname(__file__),'CDFs','chainlenCDF.csv')
     f = open(filename, 'r')
     f.readline()
     lengthList = []
@@ -41,27 +41,41 @@ def sampleActionGen(chainLenSampleList):
     sampleNum = len(chainLenSampleList)
     # TODO: now function name is hard coded, and it should be pre-created
     funcName = 'func'
-    for i in range(sampleNum):
-        appName = "app%d" %i
-        length = chainLenSampleList[i]
+    for sequenceID in range(sampleNum):
+        appName = "app%d" %sequenceID
+        length = chainLenSampleList[sequenceID]
         
         # TODO: OpenWhisk's sequenceMaxActions is 50
         # The configuration can be found in $OPENWHISK_SRC/ansible/group_vars/all
         if length > 50:
             continue
         
-        funcChainStr = (funcName + ",") * (length - 1) + funcName 
+        funcChainStr = ""
+        # Create functions in the app
+        for functionID in range(length):
+            actionUpdateScript = os.path.join(os.path.dirname(__file__), 'action_update.sh')
+            cmd = "%s %d %d" %(actionUpdateScript, sequenceID, functionID)
+            r = os.popen(cmd)
+            r.read()
+
+            funcName = "func%d-%d" %(sequenceID, functionID)
+            funcChainStr = funcChainStr + funcName + ","
+
+        # Eliminate the ',' in the end
+        funcChainStr = funcChainStr[:-1]
+        print("%s: %s" %(appName, funcChainStr))
         cmd = "wsk -i action update %s --sequence %s" %(appName, funcChainStr)
         
         # update the action sequence
         r = os.popen(cmd)
         r.read()
-        # print(cmd)
+
+        print("Sample creation complete")
     return 
 
 
 if __name__ == '__main__':
-    # Generate 30 samples, OpenWhisk can only record 30 actions
+    # Generate 30 samples
     chainLenSampleList = chainLenSampleListGen(30)
     # print(chainLenSampleList)
     sampleActionGen(chainLenSampleList)

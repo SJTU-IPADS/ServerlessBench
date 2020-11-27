@@ -1,12 +1,15 @@
 def getAvgExecValueFromFile():
     execTimes = []
-    for i in range(1,13):
+    # There may be bugs of Azure/AzurePublicDataset in the first csv, so we start from the second csv
+    for i in range(2,13):
         filename = "../azure-trace/function_durations_percentiles.anon.d{:0>2d}.csv".format(i)
         f = open(filename, 'r')
         f.readline()
         for line in f:
             lineSplit = line.split(",")
             avgExecTime = lineSplit[3]
+            if int(avgExecTime) < 0:
+                continue 
             execTimes.append(int(avgExecTime))
         f.close()
     return execTimes

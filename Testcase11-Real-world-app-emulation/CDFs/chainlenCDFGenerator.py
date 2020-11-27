@@ -17,6 +17,7 @@ def getApplicationFunctionFromFile(filename):
     return applications    
 
 def appLenStatistic(applications):
+    # key: length, value: number of applications that contain 'length' functions
     appsLen = {}
     for app in applications:
         length = len(applications[app])

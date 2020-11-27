@@ -8,5 +8,7 @@ $FUNCTION_DIR/utils.py \
 $CDF_DIR/memCDF.csv \
 $CDF_DIR/execTimeCDF.csv
 
+SEQUENCE_ID=$1
+FUNCTION_ID=$2
 # Create function
-wsk -i action update func function.zip --docker openwhisk/python3action
+wsk -i action update func$SEQUENCE_ID-$FUNCTION_ID function.zip --docker lqyuan980413/realworldemulate

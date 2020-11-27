@@ -1,0 +1,10 @@
+# The number of sequences
+sample_number: 30
+
+# The file that stores the output information
+result_file: "invokeResult.csv"
+
+# The total time for testing
+total_run_time: 3600
+
+manual_sample_generation: True
