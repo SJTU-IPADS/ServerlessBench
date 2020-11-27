@@ -1,3 +1,6 @@
+# We don't include Azure's dataset in our repo, so the file is just for reference 
+# The dataset is open-source at https://github.com/Azure/AzurePublicDataset
+
 import numpy as np
 
 '''

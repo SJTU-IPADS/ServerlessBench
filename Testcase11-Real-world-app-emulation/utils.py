@@ -1,3 +1,5 @@
+# This file defines some helper functions
+
 import random
 import numpy as np
 def binarySearch(nums, target):

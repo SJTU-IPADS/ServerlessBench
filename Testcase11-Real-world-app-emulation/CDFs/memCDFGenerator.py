@@ -1,3 +1,6 @@
+# We don't include Azure's dataset in our repo, so the file is just for reference 
+# The dataset is open-source at https://github.com/Azure/AzurePublicDataset
+
 def getAvgMemValueFromFile():
     memory = []
     for i in range(1,13):

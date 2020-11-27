@@ -79,7 +79,7 @@ def Invoke(appName, results):
 
 # Directly call the target application, return the latency
 def callInvoke(appName):
-    cmd = "wsk -i action invoke %s -p sequence 0 --blocking --result" %appName
+    cmd = "wsk -i action invoke %s --blocking --result" %appName
     startTime = getTime()
     r = os.popen(cmd)
     r.read()
@@ -96,7 +96,7 @@ def generateInvokes():
     print("-----------------------\n")
     
     # Automatically generate random samples
-    # We suggest that generate the samples manually, or automatically generate the samples only once
+    # We suggest that generate the samples manually or automatically generate samples only once
     if not MANUAL_SAMPLE_GENERATION:
         print("Generate the samples")
         import sampleGenerator

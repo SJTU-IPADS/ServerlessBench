@@ -1,3 +1,6 @@
+# We don't include Azure's dataset in our repo, so the file is just for reference 
+# The dataset is open-source at https://github.com/Azure/AzurePublicDataset
+
 def getAvgExecValueFromFile():
     execTimes = []
     # There may be bugs of Azure/AzurePublicDataset in the first csv, so we start from the second csv
