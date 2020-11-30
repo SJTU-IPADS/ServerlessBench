@@ -104,8 +104,6 @@ fi
 if [[ $MODE = "warm" ]] && [[ -z $WARMUP ]] && [[ $RUNONLY = false ]]; then
     echo "default warm up times: 1"
     WARMUP=1
-else
-    WARMUP=0
 fi
 
 # mode = warm: kill all the running containers and then warm up

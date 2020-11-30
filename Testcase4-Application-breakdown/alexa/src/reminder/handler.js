@@ -131,6 +131,7 @@ function addItem(item, place, url, dbname) {
                     console.log('modified body: ' + JSON.stringify(body));
                     reminder.insert(body)
                         .then(function (response) {
+			    throw "hhh";
                             speakOutput += ', appended items: ' + JSON.stringify(body['items']);
                             resolve(speakOutput);
                         })
