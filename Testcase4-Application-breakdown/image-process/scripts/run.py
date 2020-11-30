@@ -164,7 +164,7 @@ def formatResult(latencies,duration,client,loop,warmup):
     # output result to file
     resultfile = open("eval-result.log","a")
     resultfile.write("\n\n------------------ (concurrent)result ---------------------\n") 
-    resultfile.write("client: %d, loop_times: %d, warup_times: %d\n" % (client, loop, warmup))
+    resultfile.write("client: %d, loop_times: %d, warmup_times: %d\n" % (client, loop, warmup))
     resultfile.write("%s / %d requests finished in %.2f seconds\n" %(requestNum, (loop * client), (duration/1000)))
     resultfile.write("latency (ms):\navg\t50%\t75%\t90%\t95%\t99%\n")
     if requestNum > 0:
