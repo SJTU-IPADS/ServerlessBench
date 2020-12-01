@@ -21,10 +21,6 @@ import hashlib
 import base64
 #import boto3
 
-BASE_FILE = {
-    "openwhisk": "openwhisk_function/packages.zip"
-}
-
 PACKAGE_GG_DIR = "_gg"
 
 functions = [
@@ -73,8 +69,6 @@ def create_function_package(label, output, function_execs, gg_execute_static):
 
     for exe in function_execs:
         PACKAGE_FILES["executables/{}".format(exe[0])] = exe[1]
-
-    shutil.copy(BASE_FILE[label], output)
 
     with ZipFile(output, 'a') as funczip:
         for fn, fp in PACKAGE_FILES.items():

@@ -1,0 +1,10 @@
+[submodule "gcc"]
+	path = gcc
+	url = https://github.com/gcc-mirror/gcc
+	update = none
+[submodule "libgg"]
+	path = libgg
+	url = https://github.com/stanfordsnr/libgg
+[submodule "binutils-gdb"]
+	path = binutils-gdb
+	url = git://sourceware.org/git/binutils-gdb.git

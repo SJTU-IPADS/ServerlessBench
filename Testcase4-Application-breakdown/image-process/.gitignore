@@ -7,3 +7,4 @@ target/
 output_file
 *.zip
 thumbnail-try/*
+**/dependency-reduced-pom.xml

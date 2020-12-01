@@ -21,6 +21,7 @@ make -j8
 sudo make install
 
 cd src/remote
+rm -f gg-openwhisk-function.zip
 make ggfunctions-openwhisk
 
 echo "2. uploading function to OpenWhisk..."

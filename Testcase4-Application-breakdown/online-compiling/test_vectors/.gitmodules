@@ -1,0 +1,6 @@
+[submodule "mosh"]
+	path = mosh
+	url = https://github.com/mobile-shell/mosh
+[submodule "hello"]
+	path = hello
+	url = https://github.com/stanfordsnr/gnu-hello
