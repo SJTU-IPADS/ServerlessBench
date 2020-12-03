@@ -1,5 +1,5 @@
 # This file defines some helper functions
-
+import time
 import random
 import numpy as np
 def binarySearch(nums, target):
@@ -20,23 +20,28 @@ def binarySearch(nums, target):
             return mid
     
     return mid
+def getTime():
+    return int(round(time.time() * 1000))
 
 def alu(times):
-    bias = 100
-    times *= bias
+    startTime = getTime()
+    base = 10000
     a = random.randint(10, 100)
     b = random.randint(10, 100)
     temp = 0
-    for i in range(times):
-        if i % 4 == 0:
-            temp = a + b
-        elif i % 4 == 1:
-            temp = a - b
-        elif i % 4 == 2:
-            temp = a * b
-        else:
-            temp = a / b
-    # print(times)
+    while True:
+        for i in range(base):
+            if i % 4 == 0:
+                temp = a + b
+            elif i % 4 == 1:
+                temp = a - b
+            elif i % 4 == 2:
+                temp = a * b
+            else:
+                temp = a / b
+        endTime = getTime()
+        if endTime - startTime > times:
+            break
     return temp
 
 def getRandFloatRefByCDF(CDFFilename):

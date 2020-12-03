@@ -10,18 +10,23 @@ execCDFFilename = "CDFs/execTimeCDF.csv"
 
 def main(args):
     """Main."""
-    startTime = time.time()
+    startTime = utils.getTime()
     sequence = args.get('sequence')
     if sequence is None:
         sequence = 0
     else:
         sequence += 1
     
+    mmStartTime = utils.getTime()
     memSize = mallocRandMem()
-    execTime = execRandTime()
+    mmEndTime = utils.getTime()
+
+    mmExecTime = mmEndTime - mmStartTime
+
+    execTime = execRandTime(mmExecTime)
     
     return { 'sequence': sequence,
-        'startTime': int(round(startTime * 1000)),
+        'startTime': startTime,
         'memSize': memSize,
         'execTime': execTime
     }
@@ -35,10 +40,13 @@ def mallocRandMem():
     call(["./function","%s" %randMem])
     return randMem
 
-def execRandTime():
+def execRandTime(mmExecTime):
     filename = execCDFFilename
     randExecTime = utils.getRandValueRefByCDF(filename)
-    utils.alu(randExecTime)
+    
+    exactAluTime = randExecTime - mmExecTime
+    if exactAluTime > 0:
+        utils.alu(exactAluTime)
     print("Execute random time: %d" %(randExecTime))
     return randExecTime
 
@@ -46,4 +54,4 @@ def execRandTime():
 if __name__ == '__main__':
     memCDFFilename = "CDFs/memCDF.csv"
     execCDFFilename="CDFs/execTimeCDF.csv"
-    mallocRandMem()
+    main({"sequence": 0})

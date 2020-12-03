@@ -45,9 +45,6 @@ def getRandomIAT(avgIAT, cv):
         if IAT > 0:
             return IAT
 
-# get the current timestamp, millisecond
-def getTime():
-    return int(round(time.time() * 1000))
 
 # Invoke apps according to the IATSeries
 def Invoke(appName, results):
@@ -80,10 +77,10 @@ def Invoke(appName, results):
 # Directly call the target application, return the latency
 def callInvoke(appName):
     cmd = "wsk -i action invoke %s --blocking --result" %appName
-    startTime = getTime()
+    startTime = utils.getTime()
     r = os.popen(cmd)
     r.read()
-    endTime = getTime()
+    endTime = utils.getTime()
     return endTime - startTime
 
 
@@ -109,7 +106,7 @@ def generateInvokes():
     threads = []
     results = {}
 
-    testStartTime = getTime()
+    testStartTime = utils.getTime()
     for i in range(SAMPLE_NUM):
         appName = "app%d" %i
         t = threading.Thread(target=Invoke,args=(appName,results))
@@ -125,7 +122,7 @@ def generateInvokes():
         resultFile.write("%s,%.2f,%.2f,%s\n" %(appName, result['avgIAT'], result['cv'], str(result['latencies'])[1:-1]))
     
     resultFile.close()
-    testEndTime = getTime()
+    testEndTime = utils.getTime()
     print("-----------------------")
     duration = (testEndTime - testStartTime) / MILLISECONDS_PER_SECOND
     print("Test duration: %.2f s" %duration)

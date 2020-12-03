@@ -1,5 +1,10 @@
 import random
 import os
+import yaml
+
+config = yaml.load(open(os.path.join(os.path.dirname(__file__),'config.yaml')), yaml.FullLoader)
+SAMPLE_NUM = config['sample_number']
+
 # Generate a list of length according to the CDF of the chain length in an app, 
 # each of which represents the chain length of an application 
 def chainLenSampleListGen(sampleNum):
@@ -8,15 +13,12 @@ def chainLenSampleListGen(sampleNum):
     CDFdict = CDF[1]
     
     sampleList = []
-    # randList = [] # Use to debug
     for i in range(sampleNum):
         randF = random.random()
-        # randList.append(randF)
         for length in lengthList:
             if CDFdict[length] > randF:
                 sampleList.append(length)
                 break
-    # print(randList)
     return sampleList
 
 # parse the CDF file, return the list of each x (x is length in the CDF), 
@@ -39,8 +41,7 @@ def parseChainLenCDFFile():
 # Generate the script to create the samples on OpenWhisk
 def sampleActionGen(chainLenSampleList):
     sampleNum = len(chainLenSampleList)
-    # TODO: now function name is hard coded, and it should be pre-created
-    funcName = 'func'
+    
     for sequenceID in range(sampleNum):
         appName = "app%d" %sequenceID
         length = chainLenSampleList[sequenceID]
@@ -74,7 +75,5 @@ def sampleActionGen(chainLenSampleList):
 
 
 if __name__ == '__main__':
-    # Generate 30 samples
-    chainLenSampleList = chainLenSampleListGen(30)
-    # print(chainLenSampleList)
+    chainLenSampleList = chainLenSampleListGen(SAMPLE_NUM)
     sampleActionGen(chainLenSampleList)
