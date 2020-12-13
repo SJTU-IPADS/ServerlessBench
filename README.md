@@ -4,8 +4,14 @@
 
 A benchmark suite with serverless workloads.
 
-*Our work has been accepted by SoCC' 20. The paper will be available soon.*
+*Our work has been accepted by SoCC' 20. The paper is available at our WebSite: serverlessbench.systems*
 
+## Info
+
+* Website: https://serverlessbench.systems/
+* Source code: https://github.com/SJTU-IPADS/ServerlessBench
+* SOCC'20 paper: https://serverlessbench.systems/socc20-serverlessbench.pdf
+* Monthly reports: https://serverlessbench.systems/en-us/docs/report
 
 ## Test Cases
 
