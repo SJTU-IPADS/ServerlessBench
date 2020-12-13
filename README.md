@@ -76,7 +76,9 @@ When requests are issued subsequently, the sandbox and JVM environment is shared
 when requests are issued concurrently, the requests are handled in auto-scaling manner and the implicit states are lost across requests.
 
 ### Testcase11: Real world emulation
-This test case consists of applications that emulate the real world applications. Details can be found in the subdirectory
+This test case consists of applications that emulate the real world applications.
+The emulation is based on traces from MS Azure.
+Details can be found in the subdirectory (see README in subdirectory).
 
 ## Contact
 
