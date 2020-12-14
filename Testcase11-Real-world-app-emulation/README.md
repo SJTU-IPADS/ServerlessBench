@@ -75,7 +75,13 @@ python3 RealWorldAppEmulation.py
 
 * result_file
 
-    The filename that stores the result of the samples
+    The filename that stores the result of the samples.
+
+    The results consist of 4 columns: 
+    * appName: the name of the application
+    * avgIAT: IAT is the time interval between two invocations. avgIAT is the average value of IATs.
+    * cv: IAT's coefficient of variation. CV = 0 means that we use identical IAT to invoke the application
+    * latencies: series of latency of every invocation of an application. (If an application invocation times out, "latency" of this invocation will be the timeout value)
 
 * total_run_time: 3600
 
