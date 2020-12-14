@@ -10,7 +10,6 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-export FN_API_URL=http://127.0.0.1:7777
 for i in $(seq 1 $1)
 do
     invokeTime=`date +%s%3N`

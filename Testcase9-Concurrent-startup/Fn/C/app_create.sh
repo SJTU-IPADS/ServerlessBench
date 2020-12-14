@@ -10,7 +10,6 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-export FN_API_URL=http://127.0.0.1:7777
 fn -v build
 fn create app rawapp
 fn deploy --app rawapp --local --no-bump
