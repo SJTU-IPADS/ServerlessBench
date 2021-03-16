@@ -31,14 +31,14 @@ if len(sys.argv) < 1:
     print('ERROR: unknown function invoke time')
     sys.exit(1)
 
-activationLog = open('./scripts/activation.log','a')
+activationLog = open('activation.log','a')
 activationLog.write("terminated\n")
 
-result = open('./scripts/result-single.log','w')
+result = open('result-single.log','w')
 
 starttime = sys.argv[1]
 
-activationLog = open('./scripts/activation.log','r')
+activationLog = open('activation.log','r')
 terminateline = activationLog.readline().strip()
 
 while(terminateline.find("terminated") == -1):

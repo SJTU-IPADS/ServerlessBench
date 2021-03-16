@@ -20,8 +20,9 @@ source $SERVERLESSBENCH_HOME/local.env
 couchdb_url=http://$COUCHDB_USERNAME:$COUCHDB_PASSWORD@$COUCHDB_IP:$COUCHDB_PORT
 
 # deploy.sh should be executed in parent dir of src
-ASSET_DIR=$(pwd)/assets
-cd src
+# ASSET_DIR=$(pwd)/assets
+ASSET_DIR=$SERVERLESSBENCH_HOME/image-process/assets
+cd $SERVERLESSBENCH_HOME/image-process/src
 
 echo "1. building functions..."
 mvn clean
