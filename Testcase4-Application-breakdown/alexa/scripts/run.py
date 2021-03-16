@@ -27,7 +27,7 @@ def client(i,results,loopTimes):
 
 def warmup(i,warmupTimes):
     for j in range(warmupTimes):
-        SERVERLESSBENCH_HOME=os.environ['SERVERLESSBENCH_HOME'] + "/image-process"
+        SERVERLESSBENCH_HOME=os.environ['SERVERLESSBENCH_HOME'] + "/alexa"
         r = os.popen("%s/scripts/action_invoke.sh" %SERVERLESSBENCH_HOME)  
         text = r.read() 
     print("client %d warmup finished" %i) 
