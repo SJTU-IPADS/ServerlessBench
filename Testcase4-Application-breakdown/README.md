@@ -74,7 +74,13 @@ sudo apt-get install maven nodejs jq\
 **It's strongly recommended to use Ubuntu 17.04 or newer**
 
 ### Deploy and test
+Set the environment variable:
 
+``` bash
+    export TESTCASE4_HOME= $WHERE_YOUR_SERVERLESSBENCH_IS/Testcase4-Application-breakdown
+```
+Then:
+```bash
     $ ./deploy.sh --all
     $ ./eval.sh --all
-
+```

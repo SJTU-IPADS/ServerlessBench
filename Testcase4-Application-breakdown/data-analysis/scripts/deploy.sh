@@ -27,12 +27,12 @@
 # limitations under the License.
 
 # Load configuration variables
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
-source $SERVERLESSBENCH_HOME/local.env
-source $SERVERLESSBENCH_HOME/eval-config
+source $TESTCASE4_HOME/local.env
+source $TESTCASE4_HOME/eval-config
 
 couchdb_url=http://$COUCHDB_USERNAME:$COUCHDB_PASSWORD@$COUCHDB_IP:$COUCHDB_PORT
 

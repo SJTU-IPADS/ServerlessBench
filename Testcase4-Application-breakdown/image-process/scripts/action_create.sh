@@ -9,8 +9,8 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
 

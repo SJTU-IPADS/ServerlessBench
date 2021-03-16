@@ -18,8 +18,8 @@ import sys, getopt
 
 def client(i,results,loopTimes):
     print("client %d start" %i)
-    SERVERLESSBENCH_HOME=os.environ['SERVERLESSBENCH_HOME'] + "/alexa"
-    command = "%s/scripts/run-single.sh -R -t " %SERVERLESSBENCH_HOME + str(loopTimes)
+    ALEXA_HOME=os.environ['TESTCASE4_HOME'] + "/alexa"
+    command = "%s/scripts/run-single.sh -R -t " %ALEXA_HOME + str(loopTimes)
     r = os.popen(command)  
     text = r.read()  
     results[i] = text
@@ -27,8 +27,8 @@ def client(i,results,loopTimes):
 
 def warmup(i,warmupTimes):
     for j in range(warmupTimes):
-        SERVERLESSBENCH_HOME=os.environ['SERVERLESSBENCH_HOME'] + "/alexa"
-        r = os.popen("%s/scripts/action_invoke.sh" %SERVERLESSBENCH_HOME)  
+        ALEXA_HOME=os.environ['TESTCASE4_HOME'] + "/alexa"
+        r = os.popen("%s/scripts/action_invoke.sh" %ALEXA_HOME)  
         text = r.read() 
     print("client %d warmup finished" %i) 
 

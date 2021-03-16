@@ -31,11 +31,11 @@ if [ $# -eq 0 ]; then
     echo "Usage: ./installCatalog.sh <workers>"
 fi
 
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
-source $SERVERLESSBENCH_HOME/local.env
+source $TESTCASE4_HOME/local.env
 
 SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SRC_DIR="$( cd "$SCRIPTS_DIR/../src/openwhisk-package-couchdb" >/dev/null 2>&1 && pwd )"

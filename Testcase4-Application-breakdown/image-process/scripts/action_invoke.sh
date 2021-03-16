@@ -10,12 +10,12 @@
 # PURPOSE.
 # See the Mulan PSL v1 for more details.
 #
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
 
-ASSETS_DIR="$SERVERLESSBENCH_HOME/image-process/assets"
+ASSETS_DIR="$TESTCASE4_HOME/image-process/assets"
 pushd $ASSETS_DIR >/dev/null 2>&1
 wsk action invoke imageProcessSequence -i --result --param imageName test.jpg
 popd >/dev/null 2>&1
