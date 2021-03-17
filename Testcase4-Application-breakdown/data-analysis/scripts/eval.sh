@@ -13,12 +13,12 @@
 
 # This script should be invoked in parent dir of scripts
 
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
-source $SERVERLESSBENCH_HOME/local.env
-source $SERVERLESSBENCH_HOME/eval-config
+source $TESTCASE4_HOME/local.env
+source $TESTCASE4_HOME/eval-config
 
 SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 

@@ -18,7 +18,8 @@ import sys, getopt
 
 def client(i,results,loopTimes):
     print("client %d start" %i)
-    command = "./scripts/run-single.sh -R -t " + str(loopTimes)
+    IMAGE_PROCESS_HOME=os.environ['TESTCASE4_HOME'] + "/image-process"
+    command = "%s/scripts/run-single.sh -R -t " %(IMAGE_PROCESS_HOME) + str(loopTimes)
     r = os.popen(command)  
     text = r.read()  
     results[i] = text
@@ -26,7 +27,8 @@ def client(i,results,loopTimes):
 
 def warmup(i,warmupTimes):
     for j in range(warmupTimes):
-        r = os.popen("./scripts/action_invoke.sh")  
+        IMAGE_PROCESS_HOME=os.environ['TESTCASE4_HOME'] + "/image-process"
+        r = os.popen("%s/scripts/action_invoke.sh" %IMAGE_PROCESS_HOME)  
         text = r.read() 
     print("client %d warmup finished" %i) 
 

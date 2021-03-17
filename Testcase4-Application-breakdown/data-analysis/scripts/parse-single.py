@@ -31,14 +31,15 @@ if len(sys.argv) < 1:
     print('ERROR: unknown function invoke time')
     sys.exit(1)
 
-activationLog = open('./scripts/activation.log','a')
+DATA_ANALYSIS_HOME=os.environ['TESTCASE4_HOME'] + "/data-analysis"
+activationLog = open('%s/scripts/activation.log' %DATA_ANALYSIS_HOME,'a')
 activationLog.write("terminated\n")
 
-result = open('./scripts/result-single.log','w')
+result = open('%s/scripts/result-single.log' %DATA_ANALYSIS_HOME,'w')
 
 starttime = sys.argv[1]
 
-activationLog = open('./scripts/activation.log','r')
+activationLog = open('%s/scripts/activation.log' %DATA_ANALYSIS_HOME,'r')
 terminateline = activationLog.readline().strip()
 
 while(terminateline.find("terminated") == -1):

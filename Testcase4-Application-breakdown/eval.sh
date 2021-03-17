@@ -14,14 +14,14 @@
 result=eval-result.log
 rm -f $result
 
-export SERVERLESSBENCH_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd $SERVERLESSBENCH_HOME
+export TESTCASE4_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd $TESTCASE4_HOME
 
 function runImage() {
     echo "measuring image-process application..."
     cd image-process
     ./scripts/eval.sh
-    cd $SERVERLESSBENCH_HOME
+    cd $TESTCASE4_HOME
     echo -e "\n\n>>>>>>>> image-process <<<<<<<<\n" >> $result
     cat image-process/$result >> $result
 }
@@ -30,7 +30,7 @@ function runAlexa() {
     echo "measuring alexa application..."
     cd alexa
     ./scripts/eval.sh
-    cd $SERVERLESSBENCH_HOME
+    cd $TESTCASE4_HOME
     echo -e "\n\n>>>>>>>> alexa <<<<<<<<\n" >> $result
     cat alexa/$result >> $result
 }
@@ -39,7 +39,7 @@ function runGGMake() {
     echo "measuring online-compiling application (make) ..."
     cd online-compiling/examples/make
     ./scripts/eval.sh
-    cd $SERVERLESSBENCH_HOME
+    cd $TESTCASE4_HOME
     echo -e "\n\n>>>>>>>> online-compiling (make) <<<<<<<<\n" >> $result
     cat online-compiling/examples/make/$result >> $result
 }
@@ -48,7 +48,7 @@ function runGGLLVM() {
     echo "measuring online-compiling application (llvm) ..."
     cd online-compiling/examples/llvm
     ./scripts/eval.sh
-    cd $SERVERLESSBENCH_HOME
+    cd $TESTCASE4_HOME
     echo -e "\n\n>>>>>>>> online-compiling (llvm) <<<<<<<<\n" >> $result
     cat online-compiling/examples/llvm/$result >> $result
 }
@@ -57,7 +57,7 @@ function runDA() {
     echo "measuring data-analysis application..."
     cd data-analysis
     ./scripts/eval.sh
-    cd $SERVERLESSBENCH_HOME
+    cd $TESTCASE4_HOME
     echo -e "\n\n>>>>>>>> data-analysis <<<<<<<<\n" >> $result
     cat data-analysis/$result >> $result
 }

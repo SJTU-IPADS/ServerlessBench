@@ -11,17 +11,18 @@
 # See the Mulan PSL v1 for more details.
 #
 
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
-source $SERVERLESSBENCH_HOME/local.env
+source $TESTCASE4_HOME/local.env
 
 couchdb_url=http://$COUCHDB_USERNAME:$COUCHDB_PASSWORD@$COUCHDB_IP:$COUCHDB_PORT
 
 # deploy.sh should be executed in parent dir of src
-ASSET_DIR=$(pwd)/assets
-cd src
+# ASSET_DIR=$(pwd)/assets
+ASSET_DIR=$TESTCASE4_HOME/image-process/assets
+cd $TESTCASE4_HOME/image-process/src
 
 echo "1. building functions..."
 mvn clean

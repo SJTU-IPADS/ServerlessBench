@@ -11,13 +11,13 @@
 # See the Mulan PSL v1 for more details.
 #
 
-if [ -z "$SERVERLESSBENCH_HOME" ]; then
-    echo "$0: ERROR: SERVERLESSBENCH_HOME environment variable not set"
+if [ -z "$TESTCASE4_HOME" ]; then
+    echo "$0: ERROR: TESTCASE4_HOME environment variable not set"
     exit
 fi
 
 set -a
-source $SERVERLESSBENCH_HOME/local.env
+source $TESTCASE4_HOME/local.env
 
 SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $SCRIPTS_DIR/../

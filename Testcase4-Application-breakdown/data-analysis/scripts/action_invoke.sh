@@ -11,5 +11,5 @@
 # See the Mulan PSL v1 for more details.
 #
 
-wsk -i action invoke wage-insert --param-file parameters.json --result --blocking
+wsk -i action invoke wage-insert --param-file parameters-1.json --result --blocking
 

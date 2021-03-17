@@ -18,7 +18,8 @@ import sys, getopt
 
 def client(i,results,loopTimes):
     print("client %d start" %i)
-    command = "./scripts/run-single.sh -R -t " + str(loopTimes)
+    ALEXA_HOME=os.environ['TESTCASE4_HOME'] + "/alexa"
+    command = "%s/scripts/run-single.sh -R -t " %ALEXA_HOME + str(loopTimes)
     r = os.popen(command)  
     text = r.read()  
     results[i] = text
@@ -26,7 +27,8 @@ def client(i,results,loopTimes):
 
 def warmup(i,warmupTimes):
     for j in range(warmupTimes):
-        r = os.popen("./scripts/action_invoke.sh")  
+        ALEXA_HOME=os.environ['TESTCASE4_HOME'] + "/alexa"
+        r = os.popen("%s/scripts/action_invoke.sh" %ALEXA_HOME)  
         text = r.read() 
     print("client %d warmup finished" %i) 
 

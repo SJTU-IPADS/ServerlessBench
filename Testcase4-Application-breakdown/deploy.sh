@@ -11,8 +11,8 @@
 # See the Mulan PSL v1 for more details.
 #
 
-# set SERVERLESSBENCH_HOME to current directory (with local.env and eval-config present)
-export SERVERLESSBENCH_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+# set TESTCASE4_HOME to current directory (with local.env and eval-config present)
+export TESTCASE4_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 function deployImage() {
     echo "deploying image-process functions..."

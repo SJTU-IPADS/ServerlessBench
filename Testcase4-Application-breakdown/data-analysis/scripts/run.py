@@ -19,7 +19,8 @@ from datetime import datetime
 
 def client(i,invokeTimes,loopTimes):
     print("client %d start" %i)
-    command = "./scripts/run-parallel-single.sh -R -t " + str(loopTimes) + " -b " + str(i+1)
+    DATA_ANALYSIS_HOME=os.environ['TESTCASE4_HOME'] + "/data-analysis"
+    command = "%s/scripts/run-parallel-single.sh -R -t " %(DATA_ANALYSIS_HOME) + str(loopTimes) + " -b " + str(i+1)
     r = os.popen(command)  
     text = r.read() 
     invokeTimes[i] = parseStart(text)
@@ -28,7 +29,8 @@ def client(i,invokeTimes,loopTimes):
 
 def warmup(i,warmupTimes):
     for j in range(warmupTimes):
-        command = "./scripts/run-parallel-single.sh -W -b " + str(i)
+        DATA_ANALYSIS_HOME=os.environ['TESTCASE4_HOME'] + "/data-analysis"
+        command = "%s/scripts/run-parallel-single.sh -W -b " %(DATA_ANALYSIS_HOME) + str(i)
         r = os.popen(command)  
         text = r.read() 
     print("client %d warmup finished" %i) 
@@ -70,11 +72,12 @@ def main():
         invokeTimes.append('')
         endTimes.append([])
 
-    r = os.popen("rm -f ./scripts/activation.log")
+    DATA_ANALYSIS_HOME=os.environ['TESTCASE4_HOME'] + "/data-analysis"
+    r = os.popen("rm -f %s/scripts/activation.log" %DATA_ANALYSIS_HOME)
     r.read()
     r = os.popen("sudo kill $(pidof wsk)")
     r.read()
-    r = os.popen("wsk -i activation poll > ./scripts/activation.log &")
+    r = os.popen("wsk -i activation poll > %s/scripts/activation.log &" %DATA_ANALYSIS_HOME)
     r.read()
 
     # Create the clients
@@ -91,7 +94,7 @@ def main():
 
     requestNum = clientNum * loopTimes
 
-    cntCmd = "ag \"wage analysis result: \" ./scripts/activation.log -c"
+    cntCmd = "ag \"wage analysis result: \" %s/scripts/activation.log -c" %DATA_ANALYSIS_HOME
     r = os.popen(cntCmd)
     cnt = r.read()
     limit = 100
@@ -108,12 +111,12 @@ def main():
     r = os.popen("sudo kill $(pidof wsk)")
     r.read()
 
-    activationLog = open('./scripts/activation.log', 'a')
+    activationLog = open('%s/scripts/activation.log' %DATA_ANALYSIS_HOME, 'a')
     activationLog.write("terminated\n")
     parseEnd(invokeTimes, endTimes)
     #print("endTimes: %s" % endTimes)
 
-    outfile = open("./scripts/result.csv","w")
+    outfile = open("%s/scripts/result.csv" %DATA_ANALYSIS_HOME,"w")
     outfile.write("invokeTime,endTime\n")
    
     latencies = []
@@ -150,7 +153,8 @@ def parseStart(result):
     return parsedResults
 
 def parseEnd(invokeTimes, endTimes):
-    activationLog = open('./scripts/activation.log', 'r')
+    DATA_ANALYSIS_HOME=os.environ['TESTCASE4_HOME'] + "/data-analysis"
+    activationLog = open('%s/scripts/activation.log' %DATA_ANALYSIS_HOME, 'r')
     
     line = activationLog.readline().strip()
     while line.find('terminated') == -1:
