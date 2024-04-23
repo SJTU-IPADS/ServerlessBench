@@ -13,6 +13,10 @@ A benchmark suite with serverless workloads.
 * SOCC'20 paper: https://serverlessbench.systems/socc20-serverlessbench.pdf
 * Monthly reports: https://serverlessbench.systems/en-us/docs/report
 
+
+**ServerlessBench 2.0 is released!**
+* Github: https://github.com/CodingYuanLiu/ServerlessBench-2.0
+
 ## Test Cases
 
 ### Testcase1: varied resource needs
@@ -89,7 +93,7 @@ Details can be found in the subdirectory (see README in subdirectory).
 ## Contact
 
 [Tianyi Yu](https://serverlessbench.systems/en-us/docs/developers/developers_dev.html),
-[Qingyuan Liu](https://serverlessbench.systems/en-us/docs/developers/developers_dev.html),
+[Qingyuan Liu](https://ipads.se.sjtu.edu.cn/zh/pub/members/qingyuan_liu/),
 [Dong Du](http://dongd.info/),
 [Yubin Xia](http://ipads.se.sjtu.edu.cn/zh/pub/members/yubin_xia/),
 [Haibo Chen](https://ipads.se.sjtu.edu.cn/pub/members/haibo_chen).
