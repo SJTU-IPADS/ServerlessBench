@@ -6,4 +6,4 @@ The application supports six different transaction actions: `Amalgamate`, `Balan
 
 ACKNOWLEDGEMENT:
 
-The bank transaction processsing refers SmallBank benchmark, as detailed in [The Cost of Serializability on Platforms That Use Snapshot Isolation](https://ieeexplore.ieee.org/document/4497466). Additionally, the application draws from the implementation found in [H-Store](https://github.com/apavlo/h-store/tree/master/src/benchmarks/edu/brown/benchmark/smallbank).
+The bank transaction processsing refers SmallBank benchmark, as detailed in [The Cost of Serializability on Platforms That Use Snapshot Isolation](https://ieeexplore.ieee.org/document/4497466). Additionally, the transaction application draws from the implementation found in [H-Store](https://github.com/apavlo/h-store/tree/master/src/benchmarks/edu/brown/benchmark/smallbank).
