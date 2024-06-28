@@ -38,7 +38,7 @@ bash ./scripts/action_invoke.sh --send-payment
 
 You can run `bash ./scripts/action_invoke.sh -h` to see how to invoke other transactions. 
 
-You can also simply run `bash ./scripts/action_invoke.sh -all` to invoke all transactions.
+You can also simply run `bash ./scripts/action_invoke.sh --all` to invoke all transactions.
 
 **ACKNOWLEDGEMENT**:
 

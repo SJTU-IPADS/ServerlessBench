@@ -2,7 +2,7 @@ if [ -z "$TESTCASE12_HOME" ]; then
     echo "$0: ERROR: TESTCASE12_HOME environment variable not set"
     exit
 fi
-source $TESTCASE4_HOME/local.env
+source $TESTCASE12_HOME/local.env
 
 gen_accoud_id() {
     acc_id0=$(($RANDOM % $SMALLBANK_NUMBER_ACCOUNT))
