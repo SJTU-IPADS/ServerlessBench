@@ -90,6 +90,11 @@ This test case consists of applications that emulate the real world applications
 The emulation is based on traces from MS Azure.
 Details can be found in the subdirectory (see README in subdirectory).
 
+### Testcase12: Transaction Application
+This test case simulates bank transaction processing for checking and savings accounts, focusing on serverless platforms. The application manages checking and savings accounts in CouchDB and supports a range of transactional actions—Amalgamate, Balance, DepositChecking, SendPayment, TransactSavings, and WriteCheck.
+
+The Transaction Application is inspired by the SmallBank benchmark and borrows design elements from H-Store’s SmallBank implementation.
+
 ## Contact
 
 [Tianyi Yu](https://serverlessbench.systems/en-us/docs/developers/developers_dev.html),
