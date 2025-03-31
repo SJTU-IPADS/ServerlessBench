@@ -19,19 +19,19 @@ public class DepositChecking {
         String couchdb_dbname = args.get("COUCHDB_DBNAME").getAsString();
 
         if (couchdb_url == null) {
-            System.out.println("Amalgamate: missing COUCHDB_URL");
+            System.out.println("DepositChecking: missing COUCHDB_URL");
             return response;
         }
         if (couchdb_username == null) {
-            System.out.println("Amalgamate: missing COUCHDB_USERNAME");
+            System.out.println("DepositChecking: missing COUCHDB_USERNAME");
             return response;
         }
         if (couchdb_password == null) {
-            System.out.println("Amalgamate: missing COUCHDB_PASSWORD");
+            System.out.println("DepositChecking: missing COUCHDB_PASSWORD");
             return response;
         }
         if (couchdb_dbname == null) {
-            System.out.println("Amalgamate: missing COUCHDB_DBNAME");
+            System.out.println("DepositChecking: missing COUCHDB_DBNAME");
             return response;
         }
 
